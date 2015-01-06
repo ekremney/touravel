@@ -1,14 +1,20 @@
-Touravel - http://touravel.org
+Touravel
+--------
+http://touravel.org
 
 Bilkent University Computer Engineering
+
 CS 491/2 - SENIOR DESIGN PROJECT
 
 
 Group Members:
 -------------
 Gokhan Cetin
+
 Gokhan Guler
+
 Utku Bozoklu
+
 Ekrem Dogan
 
 What is this:
