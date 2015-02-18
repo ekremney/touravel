@@ -3,6 +3,9 @@ from datetime import datetime, date
 from ..exceptions import ValidationError
 import re
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import request, current_app
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
 
 class User(db.Model):
 	__tablename__ = 'users'
@@ -55,4 +58,18 @@ class User(db.Model):
 		db.session.add(user)
 		return True
 
+	def generate_auth_token(self, expiration=900):
+		s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
+		return s.dumps({'id': self.id}).decode('ascii')
+
+	def verify_password(self, password):
+		return check_password_hash(self.password_hash, password)
+
+	@staticmethod
+	def login(headers):
+		s = Serializer(current_app.config['SECRET_KEY'])
+		user = User.query.filter_by(email=headers.get('email')).first()
+		if user is not None and user.verify_password(headers.get('password')):
+			return user.generate_auth_token()
+		return None
 

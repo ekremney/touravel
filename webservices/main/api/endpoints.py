@@ -1,17 +1,22 @@
-from flask import request, jsonify
+from flask import request
 from .. import db
 from main.models.user import User
 from . import api
 from .errors import bad_request, unauthorized, forbidden
+from main.responder.response import render_response
 
 @api.route('/api/v1.0/user', methods=['POST'])
 def register():
 	user = User.from_json(request.json)
-	response = jsonify({'message': 'User is successfully created.'})
-	response.status_code = 201
-	return response
+	return render_response(201, {'message': 'User is successfully created.'})
 
 @api.route('/api/v1.0/user', methods=['GET'])
 def get_users():
-	return jsonify(request.headers)
-	
+	return render_response(200, request.headers)
+
+@api.route('/api/v1.0/login', methods=['GET'])
+def login():
+	token = User.login(request.headers)
+	if token is not None:
+		return render_response(200, {'auth-key': token})
+	return render_response(401, {'message': 'Login unsuccessful.'})
