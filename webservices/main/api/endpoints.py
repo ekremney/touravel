@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from .. import db
-from ..models import User
+from main.models.user import User
 from . import api
 from .errors import bad_request, unauthorized, forbidden
 

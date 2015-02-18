@@ -1,10 +1,12 @@
+import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://touravel_admin:1111@localhost/touravel'
 
     @staticmethod
     def init_app(app):
@@ -12,17 +14,21 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
 
 class TestingConfig(Config):
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
 
 class ProductionConfig(Config):
-    TESTING = False
+    SQLALCHEMY_DATABASE_URI = 'postgresql://touravel_admin:1111@localhost/touravel'
 
 config = {
-    'default': DevelopmentConfig
+    'testing': TestingConfig,
+    'production': ProductionConfig, 
+    'development': DevelopmentConfig
 }
 
 db = SQLAlchemy()
