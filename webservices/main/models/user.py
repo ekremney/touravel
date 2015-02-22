@@ -58,12 +58,41 @@ class User(db.Model):
 		db.session.add(user)
 		return True
 
+	def change_email(self, json_post):
+		if json_post is None or json_post == '':
+			raise ValidationError('This request should have contain a proper JSON')
+		email = json_post.get('email')
+		email_again = json_post.get('email_again')
+		if email is None or email_again is None:
+			raise ValidationError('Please fill all the blanks.')
+		if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
+			raise ValidationError('Please enter a valid email in email field.')
+		if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email_again):
+			raise ValidationError('Please enter a valid email in email_again field.')
+		if email != email_again:
+			raise ValidationError('Emails do not match.')
+		self.email = email
+		db.session.add(self)
+		return True
+
+	def change_password(self, json_post):
+		return True
+
 	def generate_auth_token(self, expiration=900):
 		s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
 		return s.dumps({'id': self.id}).decode('ascii')
 
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
+
+	@staticmethod
+	def verify_auth_token(token):
+		s = Serializer(current_app.config['SECRET_KEY'])
+		try:
+			data = s.loads(token)
+		except:
+			return None
+		return User.query.get(data['id'])
 
 	@staticmethod
 	def login(headers):
