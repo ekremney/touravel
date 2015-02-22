@@ -40,7 +40,7 @@ class User(db.Model):
 		password_again = json_post.get('password_again')
 		birthdate = "" + json_post.get('birthdate')
 		if username is None or email is None or password is None or password_again is None or birthdate is None:
-			raise ValidationError('Please fill all the blanks.')
+			raise ValidationError('Please fill all fields.')
 		if password != password_again:
 			raise ValidationError('Passwords do not match.')
 		if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
@@ -64,7 +64,7 @@ class User(db.Model):
 		email = json_post.get('email')
 		email_again = json_post.get('email_again')
 		if email is None or email_again is None:
-			raise ValidationError('Please fill all the blanks.')
+			raise ValidationError('Please fill all fields.')
 		if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
 			raise ValidationError('Please enter a valid email in email field.')
 		if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email_again):
@@ -76,6 +76,19 @@ class User(db.Model):
 		return True
 
 	def change_password(self, json_post):
+		if json_post is None or json_post == '':
+			raise ValidationError('This request should have contain a proper JSON')
+		old_password = json_post.get('old_password')
+		new_password = json_post.get('new_password')
+		new_password_again = json_post.get('new_password_again')
+		if old_password is None or new_password is None or new_password_again is None:
+			raise ValidationError('Please fill all fields.')
+		if new_password != new_password_again:
+			raise ValidationError('Passwords do not match.')
+		if not self.verify_password(old_password):
+			raise ValidationError('Old password is wrong.')
+		self.password_hash = generate_password_hash(new_password)
+		db.session.add(self)
 		return True
 
 	def generate_auth_token(self, expiration=900):

@@ -1,72 +1,103 @@
-[Sat Feb 21 08:41:41 2015] [notice] caught SIGTERM, shutting down
-[Sat Feb 21 08:41:56 2015] [warn] mod_wsgi: Compiled for Python/2.7.5.
-[Sat Feb 21 08:41:56 2015] [warn] mod_wsgi: Runtime using Python/2.7.9.
-[Sat Feb 21 08:41:56 2015] [notice] Apache/2.2.25 (Unix) mod_wsgi/3.5 Python/2.7.9 configured -- resuming normal operations
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1] mod_wsgi (pid=515541): Target WSGI script '/home/narlab/webapps/touravel/wsgi.py' cannot be loaded as Python module.
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1] mod_wsgi (pid=515541): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/wsgi.py", line 3, in <module>
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]     from touravel import app as application
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/__init__.py", line 7, in <module>
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]     app = create_app('development')
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/__init__.py", line 43, in create_app
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]     from .api import api as api_blueprint
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/__init__.py", line 5, in <module>
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]     from . import endpoints, errors
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 3, in <module>
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1]     from main.models.user import User
-[Sat Feb 21 08:42:03 2015] [error] [client 127.0.0.1] ImportError: No module named main.models.user
-[Sat Feb 21 08:42:10 2015] [notice] caught SIGTERM, shutting down
-[Sat Feb 21 08:42:15 2015] [warn] mod_wsgi: Compiled for Python/2.7.5.
-[Sat Feb 21 08:42:15 2015] [warn] mod_wsgi: Runtime using Python/2.7.9.
-[Sat Feb 21 08:42:15 2015] [notice] Apache/2.2.25 (Unix) mod_wsgi/3.5 Python/2.7.9 configured -- resuming normal operations
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1] mod_wsgi (pid=516424): Target WSGI script '/home/narlab/webapps/touravel/wsgi.py' cannot be loaded as Python module.
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1] mod_wsgi (pid=516424): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/wsgi.py", line 3, in <module>
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]     from touravel import app as application
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/__init__.py", line 7, in <module>
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]     app = create_app('development')
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/__init__.py", line 43, in create_app
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]     from .api import api as api_blueprint
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/__init__.py", line 5, in <module>
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]     from . import endpoints, errors
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 3, in <module>
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1]     from main.models.user import User
-[Sat Feb 21 08:43:07 2015] [error] [client 127.0.0.1] ImportError: No module named main.models.user
-[Sat Feb 21 08:47:21 2015] [notice] caught SIGTERM, shutting down
-[Sat Feb 21 08:47:26 2015] [warn] mod_wsgi: Compiled for Python/2.7.5.
-[Sat Feb 21 08:47:26 2015] [warn] mod_wsgi: Runtime using Python/2.7.9.
-[Sat Feb 21 08:47:26 2015] [notice] Apache/2.2.25 (Unix) mod_wsgi/3.5 Python/2.7.9 configured -- resuming normal operations
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1] mod_wsgi (pid=526799): Target WSGI script '/home/narlab/webapps/touravel/wsgi.py' cannot be loaded as Python module.
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1] mod_wsgi (pid=526799): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/wsgi.py", line 3, in <module>
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]     from touravel import app as application
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/__init__.py", line 7, in <module>
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]     app = create_app('development')
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/__init__.py", line 43, in create_app
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]     from .api import api as api_blueprint
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/__init__.py", line 5, in <module>
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]     from . import endpoints, errors
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 3, in <module>
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1]     from main.models.user import User
-[Sat Feb 21 08:47:34 2015] [error] [client 127.0.0.1] ImportError: No module named main.models.user
-[Sat Feb 21 08:52:37 2015] [notice] caught SIGTERM, shutting down
-[Sat Feb 21 08:52:42 2015] [warn] mod_wsgi: Compiled for Python/2.7.5.
-[Sat Feb 21 08:52:42 2015] [warn] mod_wsgi: Runtime using Python/2.7.9.
-[Sat Feb 21 08:52:42 2015] [notice] Apache/2.2.25 (Unix) mod_wsgi/3.5 Python/2.7.9 configured -- resuming normal operations
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1] mod_wsgi (pid=536736): Target WSGI script '/home/narlab/webapps/touravel/wsgi.py' cannot be loaded as Python module.
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1] mod_wsgi (pid=536736): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/wsgi.py", line 3, in <module>
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]     from touravel import app as application
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/__init__.py", line 7, in <module>
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]     app = create_app('development')
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/__init__.py", line 43, in create_app
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]     from .api import api as api_blueprint
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/__init__.py", line 5, in <module>
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]     from . import endpoints, errors
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 3, in <module>
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1]     from .main.models.user import User
-[Sat Feb 21 08:52:50 2015] [error] [client 127.0.0.1] ImportError: No module named main.models.user
+[Sun Feb 22 12:08:04 2015] [notice] caught SIGTERM, shutting down
+[Sun Feb 22 12:08:09 2015] [warn] mod_wsgi: Compiled for Python/2.7.5.
+[Sun Feb 22 12:08:09 2015] [warn] mod_wsgi: Runtime using Python/2.7.9.
+[Sun Feb 22 12:08:09 2015] [notice] Apache/2.2.25 (Unix) mod_wsgi/3.5 Python/2.7.9 configured -- resuming normal operations
+[Sun Feb 22 12:11:40 2015] [error] [client 127.0.0.1] mod_wsgi (pid=903092): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
+[Sun Feb 22 12:11:40 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Sun Feb 22 12:11:40 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1836, in __call__
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     return self.wsgi_app(environ, start_response)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1820, in wsgi_app
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     response = self.make_response(self.handle_exception(e))
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1403, in handle_exception
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     reraise(exc_type, exc_value, tb)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1817, in wsgi_app
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     response = self.full_dispatch_request()
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1477, in full_dispatch_request
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     rv = self.handle_user_exception(e)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1381, in handle_user_exception
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     reraise(exc_type, exc_value, tb)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1475, in full_dispatch_request
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     rv = self.dispatch_request()
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1461, in dispatch_request
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     return self.view_functions[rule.endpoint](**req.view_args)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 20, in login
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     token = User.login(request.headers)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/models/user.py", line 114, in login
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     if user is not None and user.verify_password(headers.get('password')):
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/models/user.py", line 99, in verify_password
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     return check_password_hash(self.password_hash, password)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 247, in check_password_hash
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 191, in _hash_internal
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     hashfunc=hash_func)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 64, in pbkdf2_hex
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     rv = pbkdf2_bin(data, salt, iterations, keylen, hashfunc)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 104, in pbkdf2_bin
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1]     keylen)
+[Sun Feb 22 12:11:41 2015] [error] [client 127.0.0.1] TypeError: pbkdf2_hmac() argument 2 must be string or buffer, not None
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1] mod_wsgi (pid=903093): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1836, in __call__
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     return self.wsgi_app(environ, start_response)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1820, in wsgi_app
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     response = self.make_response(self.handle_exception(e))
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1403, in handle_exception
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     reraise(exc_type, exc_value, tb)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1817, in wsgi_app
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     response = self.full_dispatch_request()
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1477, in full_dispatch_request
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     rv = self.handle_user_exception(e)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1381, in handle_user_exception
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     reraise(exc_type, exc_value, tb)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1475, in full_dispatch_request
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     rv = self.dispatch_request()
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1461, in dispatch_request
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     return self.view_functions[rule.endpoint](**req.view_args)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 20, in login
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     token = User.login(request.headers)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/models/user.py", line 114, in login
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     if user is not None and user.verify_password(headers.get('password')):
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/models/user.py", line 99, in verify_password
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     return check_password_hash(self.password_hash, password)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 247, in check_password_hash
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 191, in _hash_internal
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     hashfunc=hash_func)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 64, in pbkdf2_hex
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     rv = pbkdf2_bin(data, salt, iterations, keylen, hashfunc)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 104, in pbkdf2_bin
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1]     keylen)
+[Sun Feb 22 12:11:49 2015] [error] [client 127.0.0.1] TypeError: pbkdf2_hmac() argument 2 must be string or buffer, not None
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1] mod_wsgi (pid=903097): Exception occurred processing WSGI script '/home/narlab/webapps/touravel/wsgi.py'.
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1] Traceback (most recent call last):
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1836, in __call__
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     return self.wsgi_app(environ, start_response)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1820, in wsgi_app
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     response = self.make_response(self.handle_exception(e))
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1403, in handle_exception
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     reraise(exc_type, exc_value, tb)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1817, in wsgi_app
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     response = self.full_dispatch_request()
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1477, in full_dispatch_request
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     rv = self.handle_user_exception(e)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1381, in handle_user_exception
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     reraise(exc_type, exc_value, tb)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1475, in full_dispatch_request
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     rv = self.dispatch_request()
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Flask-0.10.1-py2.7.egg/flask/app.py", line 1461, in dispatch_request
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     return self.view_functions[rule.endpoint](**req.view_args)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/api/endpoints.py", line 20, in login
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     token = User.login(request.headers)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/models/user.py", line 114, in login
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     if user is not None and user.verify_password(headers.get('password')):
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/webapps/touravel/touravel/main/models/user.py", line 99, in verify_password
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     return check_password_hash(self.password_hash, password)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 247, in check_password_hash
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     return safe_str_cmp(_hash_internal(method, salt, password)[0], hashval)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 191, in _hash_internal
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     hashfunc=hash_func)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 64, in pbkdf2_hex
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     rv = pbkdf2_bin(data, salt, iterations, keylen, hashfunc)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]   File "/home/narlab/lib/python2.7/Werkzeug-0.10.1-py2.7.egg/werkzeug/security.py", line 104, in pbkdf2_bin
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1]     keylen)
+[Sun Feb 22 12:12:00 2015] [error] [client 127.0.0.1] TypeError: pbkdf2_hmac() argument 2 must be string or buffer, not None
