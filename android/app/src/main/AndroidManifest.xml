@@ -20,6 +20,10 @@
             android:name="com.example.touravel.app.MainActivity"
             android:label="@string/app_name" >
         </activity>
+
+        <activity android:name=".LoginActivity" android:label="@string/app_name">
+
+        </activity>
     </application>
 
 </manifest>

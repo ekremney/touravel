@@ -35,7 +35,7 @@ public class SplashScreen extends Activity {
 
                 if (!mIsBackButtonPressed) {
                     // start the home screen if the back button wasn't pressed already
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                     SplashScreen.this.startActivity(intent);
                 }
 
