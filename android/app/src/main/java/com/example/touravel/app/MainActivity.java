@@ -1,38 +1,54 @@
 package com.example.touravel.app;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+        import android.app.TabActivity;
+        import android.content.Intent;
+        import android.graphics.Color;
+        import android.os.Bundle;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.widget.ImageView;
+        import android.widget.TabHost;
+        import android.widget.TabWidget;
+        import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+@SuppressWarnings("deprecation")
+public class MainActivity extends TabActivity {
+    TabHost tabHost;
+    /** Called when the activity is first created. */
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tabHost = getTabHost();
+        setTabs();
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    private void setTabs()
+    {
+        addTab("Profile", R2.drawable.tab_home, ProfileActivity.class);
+        addTab("Timeline", R2.drawable.tab_search, TimelineActivity.class);
+        addTab("Map", R2.drawable.tab_search, MapActivity.class);
+        addTab("Storyline", R2.drawable.tab_home, StorylineActivity.class);
+        addTab("Settings", R2.drawable.tab_search, SettingsActivity.class);
     }
+    private void addTab(String labelId, int drawableId, Class<?> c)
+    {
+        Intent intent = new Intent(this, c);
+        TabHost.TabSpec spec = tabHost.newTabSpec("tab" + labelId);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        View tabIndicator = LayoutInflater.from(this).inflate(R.layout.tab_indicator, getTabWidget(), false);
+        TextView title = (TextView) tabIndicator.findViewById(R.id.title);
+        title.setText(labelId);
+        ImageView icon = (ImageView) tabIndicator.findViewById(R.id.icon);
+        icon.setImageResource(drawableId);
+        spec.setIndicator(tabIndicator);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
     }
-
+    public void openMapActivity(View b)
+    {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+    }
 }
