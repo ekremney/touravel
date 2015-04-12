@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="A:\touravel\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="A:\touravel\android\app\build\intermediates\pre-dexed\debug\classes-374ec25541952a9fda22ee36202952b9c90bf065.jar" />
+    </item>
+    <item
+        jar="C:\Users\gokg\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="A:\touravel\android\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-1d67d6c5b6088792108d942e0f90b7bf8e549e0a.jar" />
+    </item>
+    <item
+        jar="A:\touravel\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="A:\touravel\android\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-e44cec3b24f25aceaf274f7300046cda7aa61eb2.jar" />
+    </item>
+    <item
+        jar="A:\touravel\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="A:\touravel\android\app\build\intermediates\pre-dexed\debug\classes-2450dc70c1b7b14c82367ade95f3207d531d7373.jar" />
+    </item>
+    <item
+        jar="A:\touravel\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="A:\touravel\android\app\build\intermediates\pre-dexed\debug\classes-fb4d32262f1b264415704a598a16b993005ecc26.jar" />
+    </item>
+
+</items>

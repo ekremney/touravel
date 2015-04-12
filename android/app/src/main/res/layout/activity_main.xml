@@ -26,14 +26,14 @@ android:layout_height="fill_parent" >
             android:layout_weight="0" />
     </LinearLayout>
 </TabHost>
-
-<ImageButton
-    android:layout_width="70sp"
-    android:layout_height="70sp"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:background="@drawable/center_tab_indicator"
-    android:onClick="openMapActivity"
-    android:src="@drawable/camera" />
-
+    <!--
+    <ImageButton
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/center_tab_indicator"
+        android:onClick="openMapActivity"
+        android:src="@drawable/camera" />
+    -->
 </RelativeLayout>
