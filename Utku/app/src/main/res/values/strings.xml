@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Utku</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- URLs -->
+    <string name="url_create_user">http://narlab.webfactional.com/api/v1.0/user</string>
+    <string name="url_login">http://narlab.webfactional.com/api/v1.0/login</string>
+    <string name="url_change_email">http://narlab.webfactional.com/api/v1.0/user/change_email</string>
+    <string name="url_change_password">http://narlab.webfactional.com/api/v1.0/user/change_password</string>
+</resources>
