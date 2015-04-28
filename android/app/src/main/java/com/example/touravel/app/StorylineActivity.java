@@ -3,6 +3,7 @@ package com.example.touravel.app;
 /**
  * Created by gokhancs on 17/03/15.
  */
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;

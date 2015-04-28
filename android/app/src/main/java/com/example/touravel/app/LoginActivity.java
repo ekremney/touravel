@@ -140,6 +140,8 @@ public class LoginActivity extends Activity {
         boolean cancel = false;
         View focusView = null;
 
+        /* LOGIN CHECKS ARE TEMPORARILY DISABLED
+
         // Check for a valid password.
         if (TextUtils.isEmpty(mPassword)) {
             mPasswordView.setError(getString(R.string.error_field_required));
@@ -166,7 +168,7 @@ public class LoginActivity extends Activity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else{
+        } else{*/
             attempMail = mEmail;
             attempPass = mPassword;
             SessionHolder.getSession(getApplicationContext()).edit().putString("emailStr", attempMail).putString("passStr", attempPass).commit();
@@ -176,7 +178,7 @@ public class LoginActivity extends Activity {
             showProgress(true);
             mAuthTask = new UserLoginTask();
             mAuthTask.execute((Void) null);
-        }
+        //}
 
     }
 

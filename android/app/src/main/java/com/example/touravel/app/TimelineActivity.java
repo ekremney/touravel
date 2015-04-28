@@ -3,10 +3,14 @@ package com.example.touravel.app;
 /**
  * Created by gokhancs on 17/03/15.
  */
+import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class TimelineActivity extends ActionBarActivity {
@@ -37,5 +41,4 @@ public class TimelineActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
