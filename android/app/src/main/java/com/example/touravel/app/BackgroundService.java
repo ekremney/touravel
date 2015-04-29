@@ -1,55 +1,120 @@
 package com.example.touravel.app;
 
+import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationListener;
 
-public class BackgroundService extends Service {
+import java.util.ArrayList;
+import java.util.Date;
 
-    public class LocalBinder extends Binder {
-        BackgroundService getService() {
+public class BackgroundService extends Service implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener{
 
-            return BackgroundService.this;
-        }
-    }
+    private GoogleApiClient mLocationClient;
+    LocationRequest mLocationRequest;
+    private Location currentLocation;
+
+
+    private static final String TAG = "BroadcastService";
+    public static final String BROADCAST_ACTION = "com.example.touravel.app.broadcast";
+    private final Handler handler = new Handler();
+    Intent intent;
+
+    private final IBinder theBinder = new LocalBinder();
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "Background Service is Created", Toast.LENGTH_SHORT).show();
+        //print("Service is born");
+        mLocationClient = new GoogleApiClient.Builder(getApplicationContext())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(20000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setFastestInterval(10000);
+
+        intent = new Intent(BROADCAST_ACTION);
     }
 
     @Override
+    public void onLocationChanged(Location location) {
+        //print("Location changed. New one: " + location.getLatitude() + "" + location.getLongitude());
+        currentLocation = location;
+        sendLocInfo();
+    }
+
+    private void sendLocInfo() {
+        intent.putExtra("lat", currentLocation.getLatitude());
+        intent.putExtra("long", currentLocation.getLongitude());
+        sendBroadcast(intent);
+    }
+
+    public void print(String text){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+//----------------------------------------------------------------------------------------------------------
+
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "Background Service is Started", Toast.LENGTH_SHORT).show();
+        //print("Service is alive.");
+        mLocationClient.connect();
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Background Service is Stopped", Toast.LENGTH_SHORT).show();
+        //print("Service is dead.");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        return theBinder;
+        return null;
     }
 
-    private final IBinder theBinder = new LocalBinder();
-
+    public class LocalBinder extends Binder {
+        BackgroundService getService() {
+            return BackgroundService.this;
+        }
+    }
 
     @Override
-    public void onStart(Intent intent, int startid) {
-        Toast.makeText(this, "Background Service is Started", Toast.LENGTH_SHORT).show();
-        // Acquire a reference to the system Location Manager
-
+    public void onConnected(Bundle bundle) {
+        LocationServices.FusedLocationApi.requestLocationUpdates(mLocationClient, mLocationRequest, this);
     }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        print("Disconnected. Please re-connect.");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult arg0) {
+        print("Failed. Please re-connect.");
+    }
+
+
+
 }
