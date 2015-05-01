@@ -21,7 +21,7 @@ public class MainActivity extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startService(new Intent(this, BackgroundService.class));
+        //startService(new Intent(this, BackgroundService.class));
         tabHost = getTabHost();
         setTabs();
     }
