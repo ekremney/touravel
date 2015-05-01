@@ -18,6 +18,7 @@ package com.example.touravel.app;
         import android.view.Menu;
         import android.view.View;
         import android.view.inputmethod.EditorInfo;
+        import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
 
@@ -100,6 +101,16 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+        Button registerButton;
+        registerButton = (Button) findViewById(R.id.sign_up_button);
+        registerButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                launchRegisterActivity();
             }
         });
         /*if((!savedID.equals(""))&&(!savedPass.equals("")))
@@ -274,6 +285,11 @@ public class LoginActivity extends Activity {
     private void launchInsideActivity()
     {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    private void launchRegisterActivity()
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

@@ -62,6 +62,16 @@
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
                 android:layout_gravity="right" />
+
+            <Button android:id="@+id/sign_up_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_marginTop="140dp"
+                android:layout_marginLeft="120dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
