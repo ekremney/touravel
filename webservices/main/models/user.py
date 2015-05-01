@@ -115,3 +115,17 @@ class User(db.Model):
 			return user.generate_auth_token()
 		return None
 
+	def user_search(self, json_post):
+		if json_post is None or json_post == '':
+			raise ValidationError('This request should have contain a proper JSON')
+		username = json_post.get('username')
+		if username is None or len(username) < 3:
+			raise ValidationError('Query must have at least 3 characters')
+		result = User.query.filter(User.username.ilike('%' + username + '%')).all()
+		return_val = {}
+		for i, val in enumerate(result):
+			return_val[i] = getattr(val, 'username')
+		print return_val
+		return return_val
+
+

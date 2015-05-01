@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/home/narlab/webapps/touravel/apache2/bin/stop
+sleep 5
+/home/narlab/webapps/touravel/apache2/bin/start

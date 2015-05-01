@@ -1,6 +1,6 @@
 from flask import request
-from ..main.api.errors import unauthorized
-from ..main.models.user import User
+from main.api.errors import unauthorized
+from main.models.user import User
 from functools import wraps
 
 def protected_realm(func):

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+LD_LIBRARY_PATH=/home/narlab/webapps/touravel/apache2/lib /home/narlab/webapps/touravel/apache2/bin/httpd.worker -f /home/narlab/webapps/touravel/apache2/conf/httpd.conf -k start

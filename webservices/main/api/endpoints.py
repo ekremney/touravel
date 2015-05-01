@@ -1,10 +1,10 @@
 from flask import request
 from .. import db
-from ...main.models.user import User
+from main.models.user import User
 from . import api
 from .errors import bad_request, unauthorized, forbidden
-from ...main.responder.response import render_response
-from ...main.decorators import protected_realm
+from main.responder.response import render_response
+from main.decorators import protected_realm
 
 @api.route('/api/v1.0/user', methods=['POST'])
 def register():
@@ -33,6 +33,13 @@ def change_email(user):
 def change_password(user):
 	user.change_password(request.json)
 	return render_response(201, {'message': 'Password is changed successfully'})
+
+@api.route('/api/v1.0/user/search', methods=['POST'])
+@protected_realm
+def user_search(user):
+	result = user.user_search(request.json)
+	return render_response(200, {'data': result})
+
 
 
 
