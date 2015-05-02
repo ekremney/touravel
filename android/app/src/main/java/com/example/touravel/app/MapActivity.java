@@ -36,19 +36,25 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.plus.Plus;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Calendar;
 import java.util.Date;
 
 
-public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
+public class MapActivity extends ActionBarActivity implements OnMapReadyCallback,
+        GoogleMap.OnMapClickListener//, GoogleMap.OnMapLongClickListener
 {
 
     public GoogleMap theMap;
-
-    private int timeInt = 5000;
-    private Handler theHandler;
-    private static final String TAG = "BroadcastTest";
-    private Intent intent;
-    boolean firstTime;
+    boolean toZoom;
+    public Location theLocation = null;
 
 
     @Override
@@ -59,49 +65,60 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        theHandler = new Handler();
-        //intent = new Intent(this, BackgroundService.class);
         registerReceiver(broadcastReceiver, new IntentFilter(BackgroundService.BROADCAST_ACTION));
 
-        firstTime = true;
-
+        toZoom = true;
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         theMap = map;
         theMap.setMyLocationEnabled(true);
-        moveCam(30.0, 25.0, 0.0);
+        //theMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        theMap.setOnMapClickListener(this);
+        //theMap.setOnMapLongClickListener(this);
+        moveCam(30.0, 25.0, 2.0);
 
+        if(BackgroundService.curRoute.getLocationNo() > 0){
+            BackgroundService.curRoute.draw(theMap);
+            theLocation = BackgroundService.curRoute.getLocation(BackgroundService.curRoute.getLocationNo() - 1);
+            animCam(theLocation.getLatitude(), theLocation.getLongitude(), 16.8);
+            toZoom = false;
+        }
     }
+
+    @Override
+    public void onMapClick(LatLng point) {
+        Location l = new Location("artificial");
+        l.setLatitude(point.latitude);
+        l.setLongitude(point.longitude);
+        for(int i = 0; i < BackgroundService.curRoute.getLocationNo(); i++)
+            if(l.distanceTo(BackgroundService.curRoute.getLocation(i)) <= Route.CIRCLE_RADIUS){
+                Intent intent = new Intent(getApplicationContext(), SelectedRoute.class);
+                //intent.putExtra("route",theRoute.toString());
+                startActivity(intent);
+                break;
+            }
+    }
+
+    /*
+        @Override
+        public void onMapLongClick(LatLng point) {
+            print("Long tapped on " + point.latitude + "" + point.longitude);
+        }
+    */
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            takeLocation(intent);
+            BackgroundService.curRoute.draw(theMap);
+            if(toZoom) {
+                theLocation = Route.stringToLoc(intent.getStringExtra("location"));
+                animCam(theLocation.getLatitude(), theLocation.getLongitude(), 16.8);
+                toZoom = false;
+            }
         }
     };
-
-    private void takeLocation(Intent intent) {
-        double latitude = intent.getDoubleExtra("lat", 0.0);
-        double longitude = intent.getDoubleExtra("long", 0.0);
-
-        print("New Location: " + latitude + "" + longitude);
-        putDot(latitude, longitude);
-        animCam(latitude, longitude, 15.8);
-
-    }
-
-    public void onResume() {
-        super.onResume();
-        //registerReceiver(broadcastReceiver, new IntentFilter(BackgroundService.BROADCAST_ACTION));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        //unregisterReceiver(broadcastReceiver);
-    }
 
     @Override
     public void onDestroy(){
@@ -109,17 +126,10 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         unregisterReceiver(broadcastReceiver);
     }
 
-    Runnable timeWatcher = new Runnable() {
-        @Override
-        public void run() {
-            theHandler.postDelayed(timeWatcher, timeInt);
-        }
-    };
-
     public void putDot(double  latitude, double longitude){
         theMap.addCircle(new CircleOptions()
                 .center(new LatLng(latitude, longitude))
-                .radius(15)
+                .radius(10)
                 .strokeColor(Color.RED)
                 .fillColor(Color.RED));
     }
@@ -141,13 +151,6 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
-/*
-    private Location getLocation() {
-    Location lastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(mLocationClient);
-    return lastKnownLocation;
-}
-*/
-
 
 
 // ------------------------------------------------------------------------------------------------------------------------
@@ -165,8 +168,6 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         if(id == R.id.action_settings) {
             return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -4,7 +4,7 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,9 +18,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service android:enabled="true" android:name=".BackgroundService" />
+        <service
+            android:name=".BackgroundService"
+            android:enabled="true" />
+
         <activity
-            android:name="com.example.touravel.app.SplashScreen"
+            android:name=".SplashScreen"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,40 +32,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.touravel.app.MainActivity"
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".TimelineActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".StorylineActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
             android:label="@string/app_name" >
         </activity>
 
-        <activity android:name=".LoginActivity" android:label="@string/app_name">
-
-        </activity>
-        <activity
-            android:name="com.example.touravel.app.MapActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.touravel.app.ProfileActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.touravel.app.TimelineActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.touravel.app.StorylineActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.touravel.app.SettingsActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.touravel.app.RegisterActivity"
-            android:label="@string/app_name" >
-        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA0Fvx1CILhKLLvvg_OTVivOTxV6Yc5dP8"/>
+            android:value="AIzaSyD655fyBe9TYkReqJ8FED0IgdMxem2Y44s" />
+        <!-- android:value="AIzaSyA0Fvx1CILhKLLvvg_OTVivOTxV6Yc5dP8" -->
+        <activity
+            android:name=".SelectedRoute"
+            android:label="@string/title_activity_selected_route" >
+        </activity>
     </application>
 
 </manifest>

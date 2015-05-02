@@ -14,5 +14,8 @@
         <item>Two</item>
         <item>Three</item>
     </string-array>
+    <string name="title_activity_selected_route">SelectedRoute</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

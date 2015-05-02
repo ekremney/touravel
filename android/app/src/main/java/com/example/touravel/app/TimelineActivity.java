@@ -3,15 +3,11 @@ package com.example.touravel.app;
 /**
  * Created by gokhancs on 17/03/15.
  */
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
+import android.widget.TextView;
 
 public class TimelineActivity extends ActionBarActivity {
 
@@ -19,6 +15,17 @@ public class TimelineActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        // Read route file for testing
+
+        TextView t = (TextView) findViewById(R.id.TimelineTV);
+        if(Route.readFile() == null)
+            t.setText(t.getText() + "null");
+        else {
+            t.setText("Location number: " + BackgroundService.curRoute.getLocationNo()
+                    + "\nFile content:\n");
+            t.setText(t.getText() + Route.readFile());
+        }
     }
 
 
