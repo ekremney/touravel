@@ -1,3 +1,8 @@
 .DS_Store
 
-*.py[cod]
+*.py[cod] 
+
+#For android studio idea files. They are annoying
+**/.idea/workspace.xml **/.idea/tasks.xml
+
+
