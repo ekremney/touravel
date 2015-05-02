@@ -40,6 +40,40 @@ def user_search(user):
 	result = user.user_search(request.json)
 	return render_response(200, {'data': result})
 
+@api.route('/api/v1.0/user/follow', methods=['GET'])
+@protected_realm
+def follow(user):
+	if user.follow(request.headers):
+		return render_response(200, {'message': 'You followed: ' + request.headers.get('username')})
+
+@api.route('/api/v1.0/user/unfollow', methods=['GET'])
+@protected_realm
+def unfollow(user):
+	if user.unfollow(request.headers):
+		return render_response(200, {'message': 'You unfollowed: ' + request.headers.get('username')})
+
+@api.route('/api/v1.0/user/edit_profile', methods=['POST'])
+@protected_realm
+def edit_profile(user):
+	user.edit_profile(request.json)
+	return render_response(200, {'message': 'Profile has been edited successfully'})
+
+@api.route('/api/v1.0/user/avatar', methods=['POST'])
+@protected_realm
+def upload_avatar(user):
+	user.change_avatar(request.json)
+	return render_response(200, {'message': 'Avatar uploaded successfully'})
+
+@api.route('/api/v1.0/user/avatar', methods=['POST'])
+@protected_realm
+def fetch_avatar(user):
+	avatar = user.fetch_avatar()
+	return render_response(200, {'data': avatar})
+
+
+
+
+
 
 
 
