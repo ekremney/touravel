@@ -15,8 +15,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
-import com.bozok.main.MainActivity;
-
 
 public class AsyncLogin extends AsyncTask<String, Void, Void> {
 

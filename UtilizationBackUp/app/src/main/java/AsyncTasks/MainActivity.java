@@ -1,4 +1,4 @@
-package com.bozok.main;
+package AsyncTasks;
 
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.bozok.util.R;
 
 import AsyncTasks.AsyncChangeEmail;
 import AsyncTasks.AsyncChangePassword;

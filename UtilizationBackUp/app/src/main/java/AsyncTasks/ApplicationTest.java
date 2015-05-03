@@ -1,4 +1,4 @@
-package com.bozok.main;
+package AsyncTasks;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

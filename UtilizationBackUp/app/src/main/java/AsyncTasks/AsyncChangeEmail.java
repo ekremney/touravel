@@ -18,8 +18,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import com.bozok.main.MainActivity;
-
 public class AsyncChangeEmail extends AsyncTask<String, Void, Void> {
 
     protected JSONObject jsonObj = null;
