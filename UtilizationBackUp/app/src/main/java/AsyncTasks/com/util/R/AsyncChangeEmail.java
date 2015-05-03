@@ -1,4 +1,4 @@
-package AsyncTasks;
+package AsyncTasks.com.util.R;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class AsyncChangePassword extends AsyncTask<String, Void, Void> {
+public class AsyncChangeEmail extends AsyncTask<String, Void, Void> {
 
     protected JSONObject jsonObj = null;
     protected String url = null;
@@ -42,9 +42,8 @@ public class AsyncChangePassword extends AsyncTask<String, Void, Void> {
             jsonObj = new JSONObject
             (
                 "{" +
-                        "\"old_password\":\"" + params[2] + "\"," +
-                        "\"new_password\":\"" + params[3] + "\"," +
-                        "\"new_password_again\":\"" + params[4] + "\"" +
+                        "\"email\":\"" + params[2] + "\"," +
+                        "\"email_again\":\"" + params[3] + "\"" +
                 "}"
             );
 

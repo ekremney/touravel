@@ -1,4 +1,4 @@
-package AsyncTasks;
+package AsyncTasks.com.util.R;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
