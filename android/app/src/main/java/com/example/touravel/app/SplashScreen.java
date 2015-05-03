@@ -1,5 +1,6 @@
 package com.example.touravel.app;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,10 +17,21 @@ public class SplashScreen extends Activity {
     private static final int SPLASH_DURATION = 2000; // 2 seconds
 
 
+    public static Context cnt;
+    public static String auth;
+
+    public static void setAuth(String auth) {
+        SplashScreen.auth = auth;
+    }
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.act_splas);
+
+        cnt = getApplicationContext();
+
+
 
         Handler handler = new Handler();
 

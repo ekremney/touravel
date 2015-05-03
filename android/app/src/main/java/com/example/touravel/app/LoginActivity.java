@@ -8,6 +8,7 @@ package com.example.touravel.app;
         import android.animation.AnimatorListenerAdapter;
         import android.annotation.TargetApi;
         import android.app.Activity;
+        import android.content.Context;
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.os.AsyncTask;
@@ -21,6 +22,8 @@ package com.example.touravel.app;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
+
+        import com.android.async.AsyncLogin;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -41,10 +44,7 @@ public class LoginActivity extends Activity {
      */
     public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
+    public static Context cnt;
 
     // Values for email and password at the time of the login attempt.
     private String mEmail;
@@ -53,8 +53,8 @@ public class LoginActivity extends Activity {
     // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
-    private View mLoginFormView;
-    private View mLoginStatusView;
+    private static View mLoginFormView;
+    private static View mLoginStatusView;
     private TextView mLoginStatusMessageView;
 
     String savedID = "";
@@ -65,16 +65,13 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.act_login);
+        cnt = getApplicationContext();
 
         SharedPreferences session = SessionHolder.getSession(getApplicationContext());
 
         savedID = SessionHolder.getSession(getApplicationContext()).getString("emailStr", attempMail);
         savedPass = SessionHolder.getSession(getApplicationContext()).getString("passStr", attempPass);
-
-        TextView tv = (TextView) findViewById(R.id.tvSampleTv);
-        tv.setText("Hint: Required ID is " + savedID + " and the pass is " + savedPass + " .");
 
         // Set up the login form.
         mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -103,6 +100,7 @@ public class LoginActivity extends Activity {
                 attemptLogin();
             }
         });
+
         Button registerButton;
         registerButton = (Button) findViewById(R.id.sign_up_button);
         registerButton.setOnClickListener(new View.OnClickListener()
@@ -113,13 +111,6 @@ public class LoginActivity extends Activity {
                 launchRegisterActivity();
             }
         });
-        /*if((!savedID.equals(""))&&(!savedPass.equals("")))
-        {
-            mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-            showProgress(true);
-            mAuthTask = new UserLoginTask();
-            mAuthTask.execute((Void) null);
-        }*/
     }
 
 
@@ -136,9 +127,7 @@ public class LoginActivity extends Activity {
      * errors are presented and no actual login attempt is made.
      */
     public void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
+
 
         // Reset errors.
         mEmailView.setError(null);
@@ -151,14 +140,12 @@ public class LoginActivity extends Activity {
         boolean cancel = false;
         View focusView = null;
 
-        /* LOGIN CHECKS ARE TEMPORARILY DISABLED
-
         // Check for a valid password.
         if (TextUtils.isEmpty(mPassword)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
-        } else if (mPassword.length() < 4) {
+        } else if (mPassword.length() < 3) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -179,7 +166,7 @@ public class LoginActivity extends Activity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else{*/
+        } else{
             attempMail = mEmail;
             attempPass = mPassword;
             SessionHolder.getSession(getApplicationContext()).edit().putString("emailStr", attempMail).putString("passStr", attempPass).commit();
@@ -187,9 +174,13 @@ public class LoginActivity extends Activity {
             // perform the user login attempt.
             mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
             showProgress(true);
-            mAuthTask = new UserLoginTask();
-            mAuthTask.execute((Void) null);
-        //}
+
+            String url = getResources().getString(R.string.url_login);
+
+            new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
+
+
+        }
 
     }
 
@@ -197,12 +188,12 @@ public class LoginActivity extends Activity {
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
+    public static void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = cnt.getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginStatusView.setVisibility(View.VISIBLE);
             mLoginStatusView.animate()
@@ -234,59 +225,6 @@ public class LoginActivity extends Activity {
         }
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                launchInsideActivity();
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
-    private void launchInsideActivity()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
     private void launchRegisterActivity()
     {
         Intent intent = new Intent(this, RegisterActivity.class);
