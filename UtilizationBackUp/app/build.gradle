@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "kim.mbb.www.utku"
+        applicationId "AsyncTasks.com.util.R"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
