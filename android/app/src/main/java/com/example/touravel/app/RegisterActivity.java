@@ -1,5 +1,6 @@
 package com.example.touravel.app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -8,6 +9,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.android.async.AsyncCreateUser;
 
 /**
  * Created by gokhancs on 02/05/15.
@@ -16,21 +20,45 @@ import android.widget.Button;
 public class RegisterActivity extends Activity
 {
 
+    protected EditText tvUsername, tvEmail, tvPassword, tvPasswordV, tvBirthDate;
+
+    public static Context cnt;
+
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Button button1;
-        button1 = (Button) findViewById(R.id.regButton);
-        button1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                launchProfileActivity();
-            }
-        });
+        cnt = getApplicationContext();
 
+        tvUsername = (EditText) findViewById(R.id.tvUsername);
+        tvEmail = (EditText) findViewById(R.id.tvEmail);
+        tvPassword = (EditText) findViewById(R.id.tvPassword);
+        tvPasswordV = (EditText) findViewById(R.id.tvPasswordV);
+        tvBirthDate = (EditText) findViewById(R.id.tvBirthDate);
+    }
+
+
+    public void btnOnClick(View v) {
+
+        switch(v.getId())
+        {
+            // Create User
+            case R.id.btnCreateUser:
+            {
+                String url = getResources().getString(R.string.url_create_user);
+                String username = tvUsername.getText().toString();
+                String email = tvEmail.getText().toString();
+                String password = tvPassword.getText().toString();
+                String passwordV = tvPasswordV.getText().toString();
+                String birthDate = tvBirthDate.getText().toString();
+
+                new AsyncCreateUser().execute(url, username, email, password, passwordV, birthDate);
+                break;
+            }
+            default:
+                break;
+
+        }
     }
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -38,10 +66,4 @@ public class RegisterActivity extends Activity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    private void launchProfileActivity()
-    {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
-
 }

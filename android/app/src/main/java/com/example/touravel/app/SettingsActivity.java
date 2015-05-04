@@ -3,128 +3,81 @@ package com.example.touravel.app;
 /**
  * Created by gokhancs on 17/03/15.
  */
-import android.app.ListActivity;
-import android.support.v7.app.ActionBarActivity;
+
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.EditText;
+
+import com.android.async.AsyncChangeEmail;
+import com.android.async.AsyncChangePassword;
 
 
-public class SettingsActivity extends ListActivity {
+public class SettingsActivity extends Activity {
 
-    private CustomAdapter mAdapter,mAdapterListener;
 
+    protected static EditText tvChangeEmail, tvChangeEmailAgain;
+    protected static EditText tvOldPassword, tvNewPassword, tvNewPasswordAgain;
+    protected Context cnt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new CustomAdapter(this);
-        /*for (int i = 1; i < 30; i++) {
-            mAdapter.addItem("Row Item #" + i);
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem("Section #" + i);
-            }
-        }*/
-        mAdapter.addSectionHeaderItem("Account Settings");
-        mAdapter.addItem("Change Name");
-        mAdapter.addItem("Change Surname");
-        mAdapter.addItem("Change Birthdate");
-        mAdapter.addItem("Current Password");
-        mAdapter.addItem("New Password");
-        mAdapter.addItem("Verify New Password");
-        mAdapter.addItem("Current Mail");
-        mAdapter.addItem("New Mail");
-        mAdapter.addItem("Verify New Mail");
+        setContentView(R.layout.footer_layout);
+        cnt = getApplicationContext();
 
-        mAdapter.addSectionHeaderItem("Application Settings");
-        mAdapter.addItem("Change Name");
-        mAdapter.addItem("Change Surname");
-        mAdapter.addItem("Change Birthdate");
-        mAdapter.addItem("Current Password");
-        mAdapter.addItem("New Password");
-        mAdapter.addItem("Verify New Password");
-        mAdapter.addItem("Current Mail");
-        mAdapter.addItem("New Mail");
-        mAdapter.addItem("Verify New Mail");
-        mAdapter.addItem("Change Name");
-        mAdapter.addItem("Change Surname");
-        mAdapter.addItem("Change Birthdate");
-        mAdapter.addItem("Current Password");
-        mAdapter.addItem("New Password");
-        mAdapter.addItem("Verify New Password");
-        mAdapter.addItem("Current Mail");
-        mAdapter.addItem("New Mail");
-        mAdapter.addItem("Verify New Mail");
-        setListAdapter(mAdapter);
-        ListView lv = (ListView) findViewById(android.R.id.list);
-        View footerView = getLayoutInflater().inflate(R.layout.footer_layout, lv, false);
-        lv.addFooterView(footerView);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v,
-                                    int position, long id) {
-                switch(position) {
-                    case 1:
-                    mAdapter.getPosition(position);
-                    mAdapter.notifyDataSetInvalidated();
-
-                        break;
-
-                    case 2:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-
-                    case 3:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-                    case 4:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-                    case 5:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-                    case 6:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-                    case 7:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-                    case 8:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-                    case 9:
-                        mAdapter.getPosition(position);
-                        mAdapter.notifyDataSetInvalidated();
-
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        });
+        tvChangeEmail = (EditText) findViewById(R.id.tvChangeEmail);
+        tvChangeEmailAgain = (EditText) findViewById(R.id.tvChangeEmailAgain);
+        tvOldPassword = (EditText) findViewById(R.id.textOldPassword);
+        tvNewPassword = (EditText) findViewById(R.id.textNewPassword);
+        tvNewPasswordAgain = (EditText) findViewById(R.id.textNewPasswordV);
     }
 
+    public static void clearEmailForm()
+    {
+        tvChangeEmail.setText("");
+        tvChangeEmailAgain.setText("");
+    }
+
+    public static void clearPasswordForm()
+    {
+        tvOldPassword.setText("");
+        tvNewPassword.setText("");
+        tvNewPasswordAgain.setText("");
+    }
+
+    public void btnOnClick(View v) {
+
+        switch(v.getId())
+        {
+            case R.id.btnChangeEmail:
+            {
+                String url = getResources().getString(R.string.url_change_email);
+                String email = tvChangeEmail.getText().toString();
+                String emailV = tvChangeEmailAgain.getText().toString();
+
+                new AsyncChangeEmail().execute(url, SplashScreen.auth, email, emailV);
+                break;
+            }
+            case R.id.btnChangePassword:
+            {
+                String url = getResources().getString(R.string.url_change_password);
+                String oldPassword = tvOldPassword.getText().toString();
+                String newPassword = tvNewPassword.getText().toString();
+                String newPasswordAgain = tvNewPasswordAgain.getText().toString();
+
+                new AsyncChangePassword().execute(url, SplashScreen.auth, oldPassword, newPassword, newPasswordAgain);
+                break;
+            }
+            default:
+                break;
+
+
+        }
+    }
 
 
     @Override
