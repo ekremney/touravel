@@ -28,8 +28,10 @@ import java.io.IOException;
 public class AsyncLogin extends AsyncTask<String, Void, Void> {
 
     protected String url = null;
-    protected String responseStr = null;
+    protected int responseCode = 0;
+    protected String responseAuth = null;
     protected int TIMEOUT_MILLISEC = 10000;
+    protected String tempUsr;
 
     @Override
     protected void onPreExecute()
@@ -52,10 +54,12 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
             HttpGet request = new HttpGet(url);
 
             request.setHeader("email", params[1]);
+            tempUsr = params[1];
             request.setHeader("password", params[2]);
 
             HttpResponse response = client.execute(request);
-            responseStr = EntityUtils.toString(response.getEntity());
+            responseCode = response.getStatusLine().getStatusCode();
+            responseAuth = EntityUtils.toString(response.getEntity());
 
             Log.i("GET", "email -> " + params[1]);
             Log.i("GET", "password -> " + params[2]);
@@ -79,23 +83,34 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
-        Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
-        Log.i("POST-Response", responseStr);
+        Toast.makeText(SplashScreen.cnt, ""+responseCode, Toast.LENGTH_LONG).show();
+        Log.i("POST-Response", ""+responseCode);
 
 
 
-        boolean state = (responseStr.indexOf("unsuccessful") > 0 );
-        /*
-           responseStr içindeki message kısmını alarak aşagıdaki error'un peşine ekleyin.
-         */
-        if(!state)
+        boolean state = (( responseCode >= 200 ) && ( responseCode < 300));
+
+
+        Log.i("state", ""+state);
+        if(state)
         {
-            String auth = responseStr;
+            String auth = responseAuth;
+            Log.i("responseAuth", ""+responseAuth);
             int i = auth.indexOf("auth-key");
+
+
+
             auth = auth.substring(i+12);
             auth = auth.substring(0,auth.length()-3);
 
+            Log.i("setAuth", ""+auth);
+
+
             SplashScreen.setAuth(auth);
+
+            Log.i("setUsernameEmail", ""+tempUsr);
+
+            SplashScreen.setUsernameEmail(tempUsr);
 
             Intent intent = new Intent(LoginActivity.cnt, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
