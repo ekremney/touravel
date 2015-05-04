@@ -12,8 +12,10 @@ def register():
 	return render_response(201, {'message': 'User is successfully created.'})
 
 @api.route('/api/v1.0/user', methods=['GET'])
-def get_users():
-	return render_response(200, request.headers)
+@protected_realm
+def get_users(user):
+	info = user.get_info(request.headers)
+	return render_response(200, info)
 
 @api.route('/api/v1.0/login', methods=['GET'])
 def login():
@@ -64,15 +66,23 @@ def upload_avatar(user):
 	user.change_avatar(request.json)
 	return render_response(200, {'message': 'Avatar uploaded successfully'})
 
-@api.route('/api/v1.0/user/avatar', methods=['POST'])
+@api.route('/api/v1.0/user/avatar', methods=['GET'])
 @protected_realm
 def fetch_avatar(user):
-	avatar = user.fetch_avatar()
+	avatar = user.fetch_avatar(request.headers)
 	return render_response(200, {'data': avatar})
 
+@api.route('/api/v1.0/user/route', methods=['POST'])
+@protected_realm
+def post_route(user):
+	user.post_route(request.json)
+	return render_response(200, {'data': 'Route posted successfully'})
 
-
-
+@api.route('/api/v1.0/user/route', methods=['GET'])
+@protected_realm
+def fetch_route(user):
+	route = user.fetch_route(request.headers)
+	return render_response(200, {'day': request.headers.get('day'), 'data': route})
 
 
 

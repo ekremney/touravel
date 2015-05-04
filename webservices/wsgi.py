@@ -6,7 +6,7 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from main.models.user import User
 
 
-application = create_app('production')
+application = create_app('development')
 
 manager = Manager(application)
 migrate = Migrate(application, db)

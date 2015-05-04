@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import request, current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from .follow import Follow
+from .post import Post
 
 
 class User(db.Model):
@@ -22,8 +23,10 @@ class User(db.Model):
 	member_since = db.Column(db.DateTime(), default=datetime.utcnow)
 	last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
 	avatar = db.Column(db.Text())
+	avatar_thumb = db.Column(db.Text())
 	followed = db.relationship('Follow', foreign_keys=[Follow.follower_id], backref=db.backref('follower', lazy='joined'), lazy='dynamic', cascade='all, delete-orphan')
 	followers = db.relationship('Follow', foreign_keys=[Follow.followed_id], backref=db.backref('followed', lazy='joined'), lazy='dynamic', cascade='all, delete-orphan')
+	posts = db.relationship('Post', backref='author', lazy='dynamic')
 
 	def __init__(self, username, email, password_hash, birthdate):
 		self.username = username
@@ -189,15 +192,42 @@ class User(db.Model):
 		self.avatar = json_post.get('avatar')
 		db.session.add(self)
 
-	def fetch_avatar(self):
-		return self.avatar
+	def fetch_avatar(self, headers):
+		username = headers.get('username')
+		if username is None:
+			raise ValidationError('You should specify a username')
+		user = User.query.filter_by(username=username).first()
+		if user is None:
+			raise ValidationError('There\'s no such user')
+		return user.avatar
 
+	def post_route(self, json_post):
+		if json_post.get('day') is None or json_post.get('data') is None:
+			raise ValidationError('JSON should have all fields')
+		day = json_post.get('day')
+		data = json_post.get('data')
+		post = Post(data=data, day=day, author_id=self.id)
+		db.session.add(post)
+		return True
 
+	def fetch_route(self, headers):
+		day = headers.get('day')
+		if day is None:
+			raise ValidationError('You should specify a day')
+		route = Post.query.filter_by(day=day).first()
+		if route is None:
+			raise ValidationError('There\'s no such route')
+		return route.data
 
-
-
-
-
+	def get_info(self, headers):
+		username = headers.get('username')
+		if username is None:
+			raise ValidationError('You should specify a username')
+		user = User.query.filter_by(username=username).first()
+		if user is None:
+			raise ValidationError('There\'s no such user')
+		info = {'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
+		return info
 
 
 
