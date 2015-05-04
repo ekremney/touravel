@@ -7,6 +7,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,10 +25,14 @@ import java.util.ArrayList;
 public class Route {
 
     private ArrayList<Location> locations = null;
+    private ArrayList<Location> stops = null;
     private ArrayList<Circle> dots = null;
     private ArrayList<CircleOptions> circles = null;
+    private Polyline line = null;
+    private PolylineOptions lineOptions = null;
     public static final int CIRCLE_RADIUS = 5;
-    public static final int dotColor = Color.RED;
+    public static final int ROUTE_COLOR = Color.RED;
+    public int lastCheckin;
     public String username;
     public int day;
     public int month;
@@ -34,12 +40,15 @@ public class Route {
 
     public Route (String user, int d, int m, int y){
         locations = new ArrayList<Location>();
+        stops = new ArrayList<Location>();
         dots = new ArrayList<Circle>();
         circles = new ArrayList<CircleOptions>();
+        lineOptions = new PolylineOptions();
         username = user;
         day = d;
         month = m;
         year = y;
+        lastCheckin = -1;
     }
 
     public Route(Route r){
@@ -50,6 +59,7 @@ public class Route {
         locations = new ArrayList<Location>();
         circles = new ArrayList<CircleOptions>();
         dots = new ArrayList<Circle>();
+        lastCheckin = r.lastCheckin;
 
         for(int i = 0; i < r.getLocationNo(); i++)
             locations.add(r.getLocation(i));
@@ -59,6 +69,9 @@ public class Route {
 
         for(int i = 0; i < r.getDots().size(); i++)
             dots.add(r.getDots().get(i));
+
+        lineOptions = r.getLineOpt();
+        line = r.getLine();
     }
 
     public void addLocation(Location location){
@@ -66,16 +79,36 @@ public class Route {
         circles.add(new CircleOptions()
                 .center(new LatLng(location.getLatitude(), location.getLongitude()))
                 .radius(CIRCLE_RADIUS)
-                .strokeColor(dotColor)
-                .fillColor(dotColor));
+                .strokeColor(ROUTE_COLOR)
+                .fillColor(ROUTE_COLOR));
+        lineOptions.add(new LatLng(location.getLatitude(), location.getLongitude()));
+    }
+
+    public void addStop(Location location){
+        stops.add(location);
+    }
+
+    public ArrayList<Location> getStops(){
+        return stops;
     }
 
     public void draw(GoogleMap map){
         clear();
-        for(int i = 0; i < getLocationNo(); i++){
+
+        lineOptions = new PolylineOptions();
+        for(int i = 0; i < getLocationNo(); i++)
+            lineOptions.add(
+                    new LatLng(locations.get(i).getLatitude(), locations.get(i).getLongitude()));
+        lineOptions.width(CIRCLE_RADIUS);
+        lineOptions.color(ROUTE_COLOR);
+        line = map.addPolyline(lineOptions);
+
+
+        for(int i = 0; i < getLocationNo(); i++) {
             Circle c = map.addCircle(circles.get(i));
             dots.add(c);
         }
+
     }
 
     public void clear(){
@@ -83,6 +116,8 @@ public class Route {
             dots.get(0).remove();
             dots.remove(0);
         }
+        if(line != null)
+            line.remove();
     }
 
     public ArrayList<CircleOptions> getCircles(){
@@ -91,6 +126,14 @@ public class Route {
 
     public ArrayList<Circle> getDots(){
         return dots;
+    }
+
+    public PolylineOptions getLineOpt(){
+        return lineOptions;
+    }
+
+    public Polyline getLine(){
+        return line;
     }
 
     public String getUsername(){
@@ -141,12 +184,13 @@ public class Route {
 
     public void delete(){
         File f = new File(BackgroundService.DIRECTORY_NAME + "/" + username
-                            + day + "-" + month + "-" + year);
+                + day + "-" + month + "-" + year);
         if(!f.exists())
             System.out.print("Dosya bulunamadı");
         else{
             clear();
-            BackgroundService.curRoute = null;
+            BackgroundService.curRoute = new Route(BackgroundService.username, BackgroundService.day,
+                    BackgroundService.month, BackgroundService.year);
             f.delete();
         }
     }
@@ -156,6 +200,10 @@ public class Route {
                 + day + "-" + month + "-" + year + "\",\"route\":\"";
         for(int i = 0; i < locations.size(); i++)
             result += locToString(locations.get(i));
+
+        result += "\"\"stops\":\"";
+        for(int i = 0; i < stops.size(); i++)
+            result += locToString(stops.get(i));
         return result + "\"}";
     }
 
@@ -172,8 +220,14 @@ public class Route {
         Route r = new Route(user, d, m, y);
         input = input.substring(input.indexOf(',') + 10);
 
-        while(!input.equals("\"}")){
+        while(input.contains("+\"\"stops")){
             r.addLocation(stringToLoc(input.substring(0, input.indexOf('+') + 1)));
+            input = input.substring(input.indexOf('+') + 1);
+        }
+        input = input.substring(input.indexOf(':') + 2);
+
+        while(!input.equals("\"}")){
+            r.addStop(stringToLoc(input.substring(0, input.indexOf('+') + 1)));
             input = input.substring(input.indexOf('+') + 1);
         }
 

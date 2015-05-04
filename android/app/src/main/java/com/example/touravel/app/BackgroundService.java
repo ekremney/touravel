@@ -28,7 +28,12 @@ public class BackgroundService extends Service implements
     public static Location lastLocation = null;
     public static String CURRENT_FILE_NAME = null;
     public static String DIRECTORY_NAME = null;
-    public static double MIN_DISTANCE_BTW_LOCS = 5;
+    public static double MIN_DISTANCE_BTW_LOCS = 13;
+    public static double MAX_ACCURACY = 10;
+    public static double STOP_TIME = 30*60*100;
+    public static double STOP_DISTANCE = 50;
+    public static long CHECK_INTERVAL = 5*1000;
+    public static long FAST_CHECK_INTERVAL = 3*1000;
     public static Route curRoute;
     public static String username = "username";
     public static Calendar today;
@@ -42,7 +47,6 @@ public class BackgroundService extends Service implements
 
     @Override
     public void onCreate() {
-        //print("Service is born");
         theLocationClient = new GoogleApiClient.Builder(getApplicationContext())
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -50,9 +54,9 @@ public class BackgroundService extends Service implements
                 .build();
 
         theLocationRequest = new LocationRequest();
-        theLocationRequest.setInterval(5000);
+        theLocationRequest.setInterval(CHECK_INTERVAL);
         theLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        theLocationRequest.setFastestInterval(3000);
+        theLocationRequest.setFastestInterval(FAST_CHECK_INTERVAL);
 
         today = Calendar.getInstance();
         day = today.get(Calendar.DAY_OF_MONTH);
@@ -74,9 +78,28 @@ public class BackgroundService extends Service implements
 
     @Override
     public void onLocationChanged(Location location) {
-        if(lastLocation == null ||
-                (lastLocation != null &&
-                        lastLocation.distanceTo(location) > MIN_DISTANCE_BTW_LOCS)) {
+        if(location.getAccuracy() < MAX_ACCURACY && (lastLocation == null ||
+                (lastLocation != null && lastLocation.distanceTo(location) > MIN_DISTANCE_BTW_LOCS))) {
+
+            boolean stopStart = false, stopStop = true;
+            int i, j;
+            for(i = curRoute.getLocationNo() - 1; i > curRoute.lastCheckin; i--)
+                if(location.getTime() - curRoute.getLocation(i).getTime() > STOP_TIME){
+                    stopStart = true;
+                    break;
+                }
+            if(stopStart)
+                for(j = i; j < curRoute.getLocationNo(); j++)
+                    if(curRoute.getLocation(j).distanceTo(location) > STOP_DISTANCE){
+                        stopStart = false;
+                        break;
+                    }
+            if(stopStart && stopStop && curRoute.lastCheckin < i + 1) {
+                curRoute.addStop(curRoute.getLocation(i + 1));
+                curRoute.lastCheckin = curRoute.getLocationNo();
+            }
+
+
             lastLocation = location;
             if(curRoute == null)
                 curRoute = new Route(username, day, month, year);
@@ -113,7 +136,6 @@ public class BackgroundService extends Service implements
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //print("Service is alive.");
         theLocationClient.connect();
         return START_STICKY;
     }
