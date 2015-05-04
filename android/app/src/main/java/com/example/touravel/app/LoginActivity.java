@@ -111,6 +111,10 @@ public class LoginActivity extends Activity {
                 launchRegisterActivity();
             }
         });
+        /*
+        ((TextView)findViewById(R.id.email)).setText("g@g.com");
+        ((TextView)findViewById(R.id.password)).setText("gggggg");
+        attemptLogin(); */
     }
 
 

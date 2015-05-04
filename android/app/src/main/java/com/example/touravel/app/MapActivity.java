@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -55,6 +56,7 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
     public GoogleMap theMap;
     boolean toZoom;
     public Location theLocation = null;
+    public Polyline line;
 
 
     @Override
@@ -89,16 +91,8 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     @Override
     public void onMapClick(LatLng point) {
-        Location l = new Location("artificial");
-        l.setLatitude(point.latitude);
-        l.setLongitude(point.longitude);
-        for(int i = 0; i < BackgroundService.curRoute.getLocationNo(); i++)
-            if(l.distanceTo(BackgroundService.curRoute.getLocation(i)) <= Route.CIRCLE_RADIUS){
-                Intent intent = new Intent(getApplicationContext(), SelectedRoute.class);
-                //intent.putExtra("route",theRoute.toString());
-                startActivity(intent);
-                break;
-            }
+        BackgroundService.curRoute.delete();
+        print("Route deleted.");
     }
 
     /*

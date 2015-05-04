@@ -16,16 +16,9 @@ public class TimelineActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        // Read route file for testing
-
         TextView t = (TextView) findViewById(R.id.TimelineTV);
-        if(Route.readFile() == null)
-            t.setText(t.getText() + "null");
-        else {
-            t.setText("Location number: " + BackgroundService.curRoute.getLocationNo()
-                    + "\nFile content:\n");
-            t.setText(t.getText() + Route.readFile());
-        }
+        t.setText("Location number: " + BackgroundService.curRoute.getLocationNo()
+                + "\nFile content:\n" + Route.readFile());
     }
 
 
