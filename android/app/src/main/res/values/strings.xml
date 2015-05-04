@@ -25,5 +25,15 @@
     <string name="url_change_email">http://narlab.webfactional.com/api/v1.0/user/change_email</string>
     <string name="url_change_password">http://narlab.webfactional.com/api/v1.0/user/change_password</string>
     <string name="url_serach_by_username">http://narlab.webfactional.com/api/v1.0/user/search</string>
+    <string name="url_follow">http://narlab.webfactional.com/api/v1.0/user/follow</string>
+    <string name="url_unfollow">http://narlab.webfactional.com/api/v1.0/user/unfollow</string>
+    <string name="url_edit_profile">http://narlab.webfactional.com/api/v1.0/user/edit_profile</string>
+    <string name="url_post_avatar">http://narlab.webfactional.com/api/v1.0/user/avatar</string>
+    <string name="url_get_avatar">http://narlab.webfactional.com/api/v1.0/user/avatar</string>
+    <string name="url_post_route">http://narlab.webfactional.com/api/v1.0/user/route</string>
+    <string name="url_get_route">http://narlab.webfactional.com/api/v1.0/user/route</string>
+    <string name="url_post_timeline">http://narlab.webfactional.com/api/v1.0/post</string>
+    <string name="url_get_timeline">http://narlab.webfactional.com/api/v1.0/post</string>
+
 
 </resources>

@@ -9,19 +9,24 @@ import android.app.Activity;
 import android.content.Intent;
 
 import android.os.Handler;
+import android.widget.ProgressBar;
 
 public class SplashScreen extends Activity {
 
     // used to know if the back button was pressed in the splash screen activity and avoid opening the next activity
     private boolean mIsBackButtonPressed;
-    private static final int SPLASH_DURATION = 2000; // 2 seconds
+    private static final int SPLASH_DURATION = 3000; // 2 seconds
 
 
     public static Context cnt;
-    public static String auth;
+    public static String username_email, auth;
 
     public static void setAuth(String auth) {
         SplashScreen.auth = auth;
+    }
+
+    public static void setUsernameEmail(String str) {
+        SplashScreen.username_email = str;
     }
 
 
@@ -33,8 +38,8 @@ public class SplashScreen extends Activity {
 
 
 
-        Handler handler = new Handler();
 
+        Handler handler = new Handler();
         // run a thread after 2 seconds to start the home screen
         handler.postDelayed(new Runnable() {
 

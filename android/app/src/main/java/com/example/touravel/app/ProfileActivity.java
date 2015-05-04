@@ -12,11 +12,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.async.AsyncLogin;
+
 
 public class ProfileActivity extends ActionBarActivity {
 
     private TextView crew,following,followers;
     private ImageView settings, profilePic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
