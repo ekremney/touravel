@@ -57,12 +57,16 @@ public class Route {
         month = r.getMonth();
         year = r.getYear();
         locations = new ArrayList<Location>();
+        stops = new ArrayList<Location>();
         circles = new ArrayList<CircleOptions>();
         dots = new ArrayList<Circle>();
         lastCheckin = r.lastCheckin;
 
         for(int i = 0; i < r.getLocationNo(); i++)
             locations.add(r.getLocation(i));
+
+        for(int i = 0; i < r.getStops().size(); i++)
+            stops.add(r.getStops().get(i));
 
         for(int i = 0; i < r.getCircles().size(); i++)
             circles.add((r.getCircles()).get(i));
@@ -72,6 +76,24 @@ public class Route {
 
         lineOptions = r.getLineOpt();
         line = r.getLine();
+    }
+
+    public boolean check(Route r){
+        boolean result = (username == r.getUsername() && day == r.getDay() && month == r.getMonth()
+                && year == r.getYear() && getLocationNo() == r.getLocationNo() &&
+                stops.size() == r.getStops().size());
+        if(!result)
+            return false;
+
+        for(int i = 0; i < r.getLocationNo(); i++)
+            if(locations.get(i) != r.getLocation(i))
+                result = false;
+
+        for(int i = 0; i < r.getStops().size(); i++)
+            if(stops.get(i) != r.getStops().get(i))
+                result = false;
+
+        return result;
     }
 
     public void addLocation(Location location){
@@ -186,7 +208,7 @@ public class Route {
         File f = new File(BackgroundService.DIRECTORY_NAME + "/" + username
                 + day + "-" + month + "-" + year);
         if(!f.exists())
-            System.out.print("Dosya bulunamadı");
+            System.out.print("File couldn't be found.");
         else{
             clear();
             BackgroundService.curRoute = new Route(BackgroundService.username, BackgroundService.day,
@@ -201,7 +223,7 @@ public class Route {
         for(int i = 0; i < locations.size(); i++)
             result += locToString(locations.get(i));
 
-        result += "\"\"stops\":\"";
+        result += "\",\"stops\":\"";
         for(int i = 0; i < stops.size(); i++)
             result += locToString(stops.get(i));
         return result + "\"}";
@@ -220,7 +242,7 @@ public class Route {
         Route r = new Route(user, d, m, y);
         input = input.substring(input.indexOf(',') + 10);
 
-        while(input.contains("+\"\"stops")){
+        while(input.contains("+\",\"stops")){
             r.addLocation(stringToLoc(input.substring(0, input.indexOf('+') + 1)));
             input = input.substring(input.indexOf('+') + 1);
         }

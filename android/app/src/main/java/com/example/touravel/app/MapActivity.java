@@ -24,6 +24,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import com.android.async.AsyncGetRoute;
+import com.android.async.AsyncPostRoute;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -52,7 +54,7 @@ import java.util.Date;
 
 
 public class MapActivity extends ActionBarActivity implements OnMapReadyCallback,
-        //GoogleMap.OnMapClickListener,
+        GoogleMap.OnMapClickListener,
         GoogleMap.OnMapLongClickListener
 {
 
@@ -78,7 +80,7 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         theMap = map;
         theMap.setMyLocationEnabled(true);
         //theMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        //theMap.setOnMapClickListener(this);
+        theMap.setOnMapClickListener(this);
         theMap.setOnMapLongClickListener(this);
         moveCam(30.0, 37.0, 2.0);
 
@@ -89,11 +91,26 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
             toZoom = false;
         }
     }
-/*
+
     @Override
     public void onMapClick(LatLng point) {
+        print("Route posted.");
+        String url = getResources().getString(R.string.url_login);
+        Route r = new Route(BackgroundService.curRoute);
+        new AsyncPostRoute().execute(url, SplashScreen.auth, BackgroundService.curRoute.toString());
+        /*
+        BackgroundService.curRoute.delete();
+        AsyncGetRoute agr = new AsyncGetRoute();
+        agr.execute(url, SplashScreen.auth, BackgroundService.day + "-" + BackgroundService.month
+                                                + "-" + BackgroundService.year);
+        BackgroundService.curRoute = Route.fromString(agr.getResult());
+        if(r.check(BackgroundService.curRoute))
+            print("Eşleşme tamam.");
+        else
+            print("Eşleşme olmadı.");
+            */
     }
-*/
+
 
     @Override
     public void onMapLongClick(LatLng point) {
@@ -144,10 +161,4 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
     public void print(String text){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-
-
-
-// ------------------------------------------------------------------------------------------------------------------------
-
-
 }

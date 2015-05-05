@@ -63,6 +63,10 @@ public class AsyncGetRoute extends AsyncTask<String, Void, Void> {
         return null;
     }
 
+    public String getResult(){
+        return responseStr;
+    }
+
     @Override
     protected void onProgressUpdate(Void... param)
     {

@@ -65,12 +65,15 @@ public class BackgroundService extends Service implements
         month = today.get(Calendar.MONTH) + 1;
         year = today.get(Calendar.YEAR);
 
+        username = SplashScreen.username_email;
+
         intent = new Intent(BROADCAST_ACTION);
         DIRECTORY_NAME = getFilesDir() + "";
         CURRENT_FILE_NAME = DIRECTORY_NAME + "/" + username + day + "-" + month + "-" + year;
 
         f = new File(CURRENT_FILE_NAME);
-        if(f.exists() && Route.readFile() != null && f.length() > 35) {
+        if(f.exists() && Route.readFile() != null && f.length() > 56
+                && Route.fromString(Route.readFile()).getLocationNo() > 0) {
             curRoute = Route.fromString(Route.readFile());
             lastLocation = curRoute.getLocation(curRoute.getLocationNo() - 1);
         }
@@ -82,7 +85,7 @@ public class BackgroundService extends Service implements
     public void onLocationChanged(Location location) {
         if(location.getAccuracy() < MAX_ACCURACY && (lastLocation == null ||
                 (lastLocation != null && lastLocation.distanceTo(location) > MIN_DISTANCE_BTW_LOCS
-                && lastLocation != null && lastLocation.distanceTo(location) < MAX_DISTANCE_BTW_LOCS))) {
+                        && lastLocation != null && lastLocation.distanceTo(location) < MAX_DISTANCE_BTW_LOCS))) {
 
             boolean stopStart = false, stopStop = true;
             int i, j;
