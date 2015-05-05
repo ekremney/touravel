@@ -72,13 +72,6 @@
             android:name=".SelectedRoute"
             android:label="@string/title_activity_selected_route" >
         </activity>
-        <activity
-            android:name=".ListUsersActivity"
-            android:label="@string/title_activity_list_users" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
     </application>
 
 </manifest>

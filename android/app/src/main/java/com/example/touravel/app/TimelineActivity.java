@@ -6,7 +6,6 @@ package com.example.touravel.app;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,7 +40,6 @@ public class TimelineActivity extends ActionBarActivity {
 
     }
 
-<<<<<<< Updated upstream
 
 
     @Override
@@ -63,6 +61,4 @@ public class TimelineActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-=======
->>>>>>> Stashed changes
 }

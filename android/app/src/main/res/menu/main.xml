@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    tools:context="com.example.touravel.app.MainActivity" >
 
-    <item android:id="@+id/action_search"
-        android:icon="@drawable/search_normal"
-        android:title="@string/action_search"
-        tools:showAsAction="always" />
-
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
 </menu>
