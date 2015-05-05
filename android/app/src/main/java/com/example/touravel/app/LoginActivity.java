@@ -17,8 +17,10 @@ package com.example.touravel.app;
         import android.text.TextUtils;
         import android.view.KeyEvent;
         import android.view.Menu;
+        import android.view.MotionEvent;
         import android.view.View;
         import android.view.inputmethod.EditorInfo;
+        import android.view.inputmethod.InputMethodManager;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
@@ -237,5 +239,13 @@ public class LoginActivity extends Activity {
     {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }

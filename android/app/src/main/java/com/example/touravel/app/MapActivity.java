@@ -161,4 +161,6 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
     public void print(String text){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
+
+
 }

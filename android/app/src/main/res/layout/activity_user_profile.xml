@@ -176,14 +176,6 @@
             android:layout_weight="25"
             android:gravity="center">
 
-            <ImageButton
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:id="@+id/btn_settings"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/settings_icon"
-                android:clickable="true" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -247,15 +239,16 @@
         android:weightSum="3"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="60dp"
-        android:id="@+id/followlayout">>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YOU"
-            android:id="@+id/textView"
-            android:textStyle="bold"
+        android:id="@+id/followlayout"><![CDATA[>
+        ]]>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="FOLLOW"
+            android:id="@+id/button"
             android:textColor="#fff"
-            android:textSize="20dp" />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>
