@@ -215,13 +215,12 @@ class User(db.Model):
 		return True
 
 	def fetch_route(self, headers):
-		day = headers.get('day')
-		if day is None:
-			raise ValidationError('You should specify a day')
-		route = Post.query.filter_by(day=day).first()
-		if route is None:
-			raise ValidationError('There\'s no such route')
-		return {'day': route.day, 'route': route.route, 'stops': route.stops}
+		route = Post.query.filter_by(author_id=self.id).all()
+		return_val = {}
+		for i, val in enumerate(route):
+			user = User.query.filter_by(id=getattr(val, 'author_id')).first()
+			return_val[i] = {'day': getattr(val, 'day'), 'route': getattr(val, 'route'), 'stops': getattr(val, 'stops')}
+		return return_val
 
 	def get_info(self, headers):
 		username = headers.get('username')
@@ -254,6 +253,35 @@ class User(db.Model):
 			user = User.query.filter_by(id=getattr(val, 'author_id')).first()
 			return_val[i] = {'post_id': getattr(val, 'id'), 'post_type': getattr(val, 'post_type'), 'name': user.name, 'username': user.username, 'data': getattr(val, 'data'), 'like_amount': getattr(val, 'like_amount'), 'avatar_thumb': user.avatar_thumb}
 		return return_val
+
+	def like_timeline(self, headers):
+		if headers.get('post_id') is None:
+			raise ValidationError('JSON should have all fields')
+		try:
+			post_id = int(headers.get('post_id'))
+		except Exception, e:
+			raise ValidationError('Post_type should be an integer')
+		t_o = Timeline.query.filter_by(id=post_id).first()
+		if t_o is None:
+			raise ValidationError('There\'s no such a post')
+		t_o.like_amount += 1
+		db.session.commit()
+		return t_o.like_amount
+
+	def unlike_timeline(self, headers):
+		if headers.get('post_id') is None:
+			raise ValidationError('JSON should have all fields')
+		try:
+			post_id = int(headers.get('post_id'))
+		except Exception, e:
+			raise ValidationError('Post_type should be an integer')
+		t_o = Timeline.query.filter_by(id=post_id).first()
+		if t_o is None:
+			raise ValidationError('There\'s no such a post')
+		t_o.like_amount -= 1
+		db.session.commit()
+		return t_o.like_amount
+
 
 
 

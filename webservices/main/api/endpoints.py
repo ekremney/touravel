@@ -96,6 +96,18 @@ def fetch_timeline(user):
 	timeline = user.fetch_timeline()
 	return render_response(200, timeline)
 
+@api.route('/api/v1.0/timeline/like', methods=['GET'])
+@protected_realm
+def like_timeline(user):
+	like_amount = user.like_timeline(request.headers)
+	return render_response(200, {'like_amount': like_amount})
+
+@api.route('/api/v1.0/timeline/unlike', methods=['GET'])
+@protected_realm
+def unlike_timeline(user):
+	like_amount = user.unlike_timeline(request.headers)
+	return render_response(200, {'like_amount': like_amount})
+
 
 
 
