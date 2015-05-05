@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface OnTaskCompleted {
     void onTaskCompleted(List<User> users);
+    void onTaskCompleted();
 }

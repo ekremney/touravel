@@ -28,6 +28,7 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
     protected String url = null;
     protected String authKey = null;
     protected String responseStr = null;
+    protected int responseCode = 0;
     protected int TIMEOUT_MILLISEC = 10000;
 
     @Override
@@ -44,12 +45,14 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
             authKey = params[1];
 
             jsonObj = new JSONObject
-            (
-                "{" +
-                        "\"post_type\":\"" + params[2] + "\"," +
-                        "\"data\":\"" + params[3] + "\"" +
-                "}"
-            );
+                    (
+                            "{" +
+                                    "\"post_type\":\"" + params[2] + "\"," +
+                                    "\"username\":\"" + params[3] + "\"," +
+                                    "\"name\":\"" + params[4] + "\"," +
+                                    "\"data\":\"" + params[5] + "\"" +
+                                    "}"
+                    );
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -64,6 +67,7 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
 
             HttpResponse response = client.execute(request);
             responseStr = EntityUtils.toString(response.getEntity());
+            responseCode = response.getStatusLine().getStatusCode();
         }
 
         catch (IOException e)
@@ -86,7 +90,24 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
+        if(responseCode >=200 && responseCode < 300)
+        {
+            Toast.makeText(SplashScreen.cnt, "ro" , Toast.LENGTH_LONG).show();
+            SettingsActivity.clearEditProfileForm();
+        }
+        else
+        {
+            String message;
+            try {
+                JSONObject reader = new JSONObject(responseStr);
+                message = reader.getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                message = "An error occurred!";
+            }
 
+            Toast.makeText(SplashScreen.cnt, message , Toast.LENGTH_LONG).show();
+        }
     }
 
 }

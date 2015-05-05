@@ -94,21 +94,6 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     @Override
     public void onMapClick(LatLng point) {
-        print("Route posted.");
-        String url = getResources().getString(R.string.url_login);
-        Route r = new Route(BackgroundService.curRoute);
-        new AsyncPostRoute().execute(url, SplashScreen.auth, BackgroundService.curRoute.toString());
-        /*
-        BackgroundService.curRoute.delete();
-        AsyncGetRoute agr = new AsyncGetRoute();
-        agr.execute(url, SplashScreen.auth, BackgroundService.day + "-" + BackgroundService.month
-                                                + "-" + BackgroundService.year);
-        BackgroundService.curRoute = Route.fromString(agr.getResult());
-        if(r.check(BackgroundService.curRoute))
-            print("Eşleşme tamam.");
-        else
-            print("Eşleşme olmadı.");
-            */
     }
 
 
@@ -161,6 +146,4 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
     public void print(String text){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-
-
 }

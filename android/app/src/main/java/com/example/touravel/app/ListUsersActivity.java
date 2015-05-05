@@ -51,6 +51,11 @@ public class ListUsersActivity extends ActionBarActivity implements OnTaskComple
                         UserListAdapter adapter = new UserListAdapter(that, users);
                         userlist.setAdapter(adapter);
                     }
+
+                    @Override
+                    public void onTaskCompleted() {
+
+                    }
                 }).execute(url, SplashScreen.auth, username);
                 break;
             }
@@ -82,6 +87,11 @@ public class ListUsersActivity extends ActionBarActivity implements OnTaskComple
 
     @Override
     public void onTaskCompleted(List<User> users) {
+
+    }
+
+    @Override
+    public void onTaskCompleted() {
 
     }
 }

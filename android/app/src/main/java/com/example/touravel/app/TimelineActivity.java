@@ -9,30 +9,32 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.async.AsyncGetTimeline;
+import com.android.interfaces.OnTaskCompleted;
 import com.custom.CustomTimelineList;
 
-public class TimelineActivity extends ActionBarActivity {
+import java.util.ArrayList;
+import java.util.List;
 
-    public static String[] dummyList = {
-            "Ekrem Doğan",
-            "Utku Bozoklu",
-            "Gökhan G.",
-            "Gökhan Ç.",
-            "Behsat Ç."
+public class TimelineActivity extends ActionBarActivity implements OnTaskCompleted {
 
-    };
+    public static String[] users;
+    public static String[] avatars;
+    public static String[] types;
+    public static String[] data;
+    public static String[] likes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-        CustomTimelineList adapterTimeline = new CustomTimelineList(getParent(), dummyList);
 
-        ListView timeLineList = (ListView) findViewById(R.id.timelineListView);
-        timeLineList.setAdapter(adapterTimeline);
+        receiveTimeline();
 
         /*
             like ve comment'ide üstteki gibi tanımlayıp listener eklerseniz tıklanma işlemlerini için fonksiyonlar
@@ -48,6 +50,20 @@ public class TimelineActivity extends ActionBarActivity {
     }
 
     public void receiveTimeline(){
+        final TimelineActivity that = this;
+        new AsyncGetTimeline(new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(List<User> users) {
+            }
+
+            @Override
+            public void onTaskCompleted() {
+                CustomTimelineList adapterTimeline = new CustomTimelineList(that.getParent(), TimelineActivity.users);
+                ListView timeLineList = (ListView) findViewById(R.id.timelineListView);
+                timeLineList.setAdapter(adapterTimeline);
+
+            }
+        }).execute(getResources().getString(R.string.url_get_timeline), SplashScreen.auth);
 
     }
 
@@ -69,5 +85,14 @@ public class TimelineActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTaskCompleted(List<User> users) {
+
+    }
+
+    @Override
+    public void onTaskCompleted() {
     }
 }
