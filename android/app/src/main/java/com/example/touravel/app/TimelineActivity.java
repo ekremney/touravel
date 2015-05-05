@@ -7,9 +7,21 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.custom.CustomTimelineList;
+
 public class TimelineActivity extends ActionBarActivity {
+
+    public static String[] dummyList = {
+            "Ekrem Doğan",
+            "Utku Bozoklu",
+            "Gökhan G.",
+            "Gökhan Ç.",
+            "Behsat Ç."
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +31,20 @@ public class TimelineActivity extends ActionBarActivity {
         TextView t = (TextView) findViewById(R.id.TimelineTV);
         t.setText("Location number: " + BackgroundService.curRoute.getLocationNo()
                 + "\nFile content:\n" + Route.readFile());
+
+        CustomTimelineList adapterTimeline = new CustomTimelineList(getParent(), dummyList);
+
+        ListView timeLineList = (ListView) findViewById(R.id.timelineListView);
+        timeLineList.setAdapter(adapterTimeline);
+
+        /*
+            like ve comment'ide üstteki gibi tanımlayıp listener eklerseniz tıklanma işlemlerini için fonksiyonlar
+            tanımlayabilirsiniz. Yeni veri geldikçe arrayi güncelleyin dummy arrayinizi mesala sonra. notifyDataSetChabged diceksiniz listview da.
+         */
+
+
     }
+
 
 
     @Override
