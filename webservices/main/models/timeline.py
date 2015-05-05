@@ -1,11 +1,11 @@
 from .. import db
 from datetime import datetime, date
 
-class Post(db.Model):
-	__tablename__ = 'posts'
+class Timeline(db.Model):
+	__tablename__ = 'timeline'
 	id = db.Column(db.Integer, primary_key=True)
-	day = db.Column(db.Text)
-	route = db.Column(db.Text)
-	stops = db.Column(db.Text)
+	post_type = db.Column(db.Integer)
+	data = db.Column(db.Text)
+	like_amount = db.Column(db.Integer)
 	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))

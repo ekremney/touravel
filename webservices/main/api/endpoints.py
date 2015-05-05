@@ -40,7 +40,7 @@ def change_password(user):
 @protected_realm
 def user_search(user):
 	result = user.user_search(request.json)
-	return render_response(200, {'data': result})
+	return render_response(200, result)
 
 @api.route('/api/v1.0/user/follow', methods=['GET'])
 @protected_realm
@@ -64,7 +64,7 @@ def edit_profile(user):
 @protected_realm
 def upload_avatar(user):
 	user.change_avatar(request.json)
-	return render_response(200, {'message': 'Avatar uploaded successfully'})
+	return render_response(201, {'message': 'Avatar uploaded successfully'})
 
 @api.route('/api/v1.0/user/avatar', methods=['GET'])
 @protected_realm
@@ -76,13 +76,28 @@ def fetch_avatar(user):
 @protected_realm
 def post_route(user):
 	user.post_route(request.json)
-	return render_response(200, {'data': 'Route posted successfully'})
+	return render_response(201, {'message': 'Route posted successfully'})
 
 @api.route('/api/v1.0/user/route', methods=['GET'])
 @protected_realm
 def fetch_route(user):
 	route = user.fetch_route(request.headers)
-	return render_response(200, {'day': request.headers.get('day'), 'data': route})
+	return render_response(200, route)
+
+@api.route('/api/v1.0/timeline', methods=['POST'])
+@protected_realm
+def post_timeline(user):
+	user.post_timeline(request.json)
+	return render_response(201, {'message': 'Timeline message has been posted!'})
+
+@api.route('/api/v1.0/timeline', methods=['GET'])
+@protected_realm
+def fetch_timeline(user):
+	timeline = user.fetch_timeline()
+	return render_response(200, timeline)
+
+
+
 
 
 
