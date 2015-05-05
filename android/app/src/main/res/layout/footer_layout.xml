@@ -33,6 +33,48 @@
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:id="@+id/textName"/>
+
+                <EditText
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Location"
+                    android:id="@+id/textLocation"/>
+
+                <EditText
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:hint="About Me"
+                    android:ems="10"
+                    android:id="@+id/textAboutMe"/>
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:onClick="btnOnClick"
+                    android:id="@+id/btnEditProfile"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
                     android:hint="New E-mail"
@@ -57,46 +99,46 @@
             </LinearLayout>
 
             <LinearLayout
-                android:background="@drawable/abc_popup_background_mtrl_mult"
+            android:background="@drawable/abc_popup_background_mtrl_mult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:hint="Old Password"
+                android:id="@+id/textOldPassword"/>
 
-                <EditText
-                    android:padding="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:hint="Old Password"
-                    android:id="@+id/textOldPassword"/>
+            <EditText
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:hint="New Password"
+                android:id="@+id/textNewPassword"/>
 
-                <EditText
-                    android:padding="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:hint="New Password"
-                    android:id="@+id/textNewPassword"/>
+            <EditText
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password verify"
+                android:id="@+id/textNewPasswordV"/>
 
-                <EditText
-                    android:padding="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="New Password verify"
-                    android:id="@+id/textNewPasswordV"/>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Password"
+                android:onClick="btnOnClick"
+                android:id="@+id/btnChangePassword"
+                android:layout_gravity="center_horizontal" />
 
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Change Password"
-                    android:onClick="btnOnClick"
-                    android:id="@+id/btnChangePassword"
-                    android:layout_gravity="center_horizontal" />
-
-            </LinearLayout>
+        </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

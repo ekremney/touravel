@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.android.async.AsyncChangeEmail;
 import com.android.async.AsyncChangePassword;
+import com.android.async.AsyncEditProfile;
 
 
 public class SettingsActivity extends Activity {
@@ -21,6 +22,7 @@ public class SettingsActivity extends Activity {
 
     protected static EditText tvChangeEmail, tvChangeEmailAgain;
     protected static EditText tvOldPassword, tvNewPassword, tvNewPasswordAgain;
+    protected static EditText tvName, tvLocation, tvAboutMe;
     protected Context cnt;
 
     @Override
@@ -34,6 +36,9 @@ public class SettingsActivity extends Activity {
         tvOldPassword = (EditText) findViewById(R.id.textOldPassword);
         tvNewPassword = (EditText) findViewById(R.id.textNewPassword);
         tvNewPasswordAgain = (EditText) findViewById(R.id.textNewPasswordV);
+        tvName = (EditText) findViewById(R.id.textName);
+        tvLocation = (EditText) findViewById(R.id.textLocation);
+        tvAboutMe = (EditText) findViewById(R.id.textAboutMe);
     }
 
     public static void clearEmailForm()
@@ -47,6 +52,13 @@ public class SettingsActivity extends Activity {
         tvOldPassword.setText("");
         tvNewPassword.setText("");
         tvNewPasswordAgain.setText("");
+    }
+
+    public static void clearEditProfileForm()
+    {
+        tvName.setText("");
+        tvLocation.setText("");
+        tvAboutMe.setText("");
     }
 
     public void btnOnClick(View v) {
@@ -70,6 +82,16 @@ public class SettingsActivity extends Activity {
                 String newPasswordAgain = tvNewPasswordAgain.getText().toString();
 
                 new AsyncChangePassword().execute(url, SplashScreen.auth, oldPassword, newPassword, newPasswordAgain);
+                break;
+            }
+            case R.id.btnEditProfile:
+            {
+                String url = getResources().getString(R.string.url_edit_profile);
+                String name = tvName.getText().toString();
+                String location = tvLocation.getText().toString();
+                String aboutMe = tvAboutMe.getText().toString();
+
+                new AsyncEditProfile().execute(url, SplashScreen.auth, name, location, aboutMe);
                 break;
             }
             default:
