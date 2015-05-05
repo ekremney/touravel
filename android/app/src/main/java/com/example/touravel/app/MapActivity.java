@@ -50,14 +50,13 @@ import java.util.Date;
 
 
 public class MapActivity extends ActionBarActivity implements OnMapReadyCallback,
-        GoogleMap.OnMapClickListener//, GoogleMap.OnMapLongClickListener
+        //GoogleMap.OnMapClickListener,
+        GoogleMap.OnMapLongClickListener
 {
 
     public GoogleMap theMap;
     boolean toZoom;
     public Location theLocation = null;
-    public Polyline line;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +76,9 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         theMap = map;
         theMap.setMyLocationEnabled(true);
         //theMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        theMap.setOnMapClickListener(this);
-        //theMap.setOnMapLongClickListener(this);
-        moveCam(30.0, 25.0, 2.0);
+        //theMap.setOnMapClickListener(this);
+        theMap.setOnMapLongClickListener(this);
+        moveCam(30.0, 37.0, 2.0);
 
         if(BackgroundService.curRoute.getLocationNo() > 0){
             BackgroundService.curRoute.draw(theMap);
@@ -88,19 +87,18 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
             toZoom = false;
         }
     }
-
+/*
     @Override
     public void onMapClick(LatLng point) {
+    }
+*/
+
+    @Override
+    public void onMapLongClick(LatLng point) {
         BackgroundService.curRoute.delete();
         print("Route deleted.");
     }
 
-    /*
-        @Override
-        public void onMapLongClick(LatLng point) {
-            print("Long tapped on " + point.latitude + "" + point.longitude);
-        }
-    */
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override

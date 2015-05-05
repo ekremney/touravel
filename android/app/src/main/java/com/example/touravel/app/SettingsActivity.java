@@ -5,12 +5,18 @@ package com.example.touravel.app;
  */
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.android.async.AsyncChangeEmail;
 import com.android.async.AsyncChangePassword;
@@ -23,6 +29,7 @@ public class SettingsActivity extends Activity {
     protected static EditText tvChangeEmail, tvChangeEmailAgain;
     protected static EditText tvOldPassword, tvNewPassword, tvNewPasswordAgain;
     protected static EditText tvName, tvLocation, tvAboutMe;
+    protected static Switch switchService;
     protected Context cnt;
 
     @Override
@@ -30,6 +37,28 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.footer_layout);
         cnt = getApplicationContext();
+
+        switchService = (Switch) findViewById(R.id.switchBS);
+        boolean isBSrunning = false;
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (BackgroundService.class.getName().equals(service.service.getClassName())) {
+                isBSrunning = true;
+            }
+        }
+        switchService.setChecked(isBSrunning);
+        switchService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    startService(new Intent(cnt, BackgroundService.class));
+                    Toast.makeText(cnt, "Service is started.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    stopService(new Intent(cnt, BackgroundService.class));
+                    Toast.makeText(cnt, "Service is stopped.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         tvChangeEmail = (EditText) findViewById(R.id.tvChangeEmail);
         tvChangeEmailAgain = (EditText) findViewById(R.id.tvChangeEmailAgain);

@@ -30,7 +30,7 @@ public class Route {
     private ArrayList<CircleOptions> circles = null;
     private Polyline line = null;
     private PolylineOptions lineOptions = null;
-    public static final int CIRCLE_RADIUS = 5;
+    public static final int CIRCLE_RADIUS = 3;
     public static final int ROUTE_COLOR = Color.RED;
     public int lastCheckin;
     public String username;
@@ -99,7 +99,7 @@ public class Route {
         for(int i = 0; i < getLocationNo(); i++)
             lineOptions.add(
                     new LatLng(locations.get(i).getLatitude(), locations.get(i).getLongitude()));
-        lineOptions.width(CIRCLE_RADIUS);
+        lineOptions.width((int) (CIRCLE_RADIUS * 4));
         lineOptions.color(ROUTE_COLOR);
         line = map.addPolyline(lineOptions);
 

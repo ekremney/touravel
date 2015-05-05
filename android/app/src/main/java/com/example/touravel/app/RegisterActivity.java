@@ -35,6 +35,12 @@ public class RegisterActivity extends Activity
         tvPassword = (EditText) findViewById(R.id.tvPassword);
         tvPasswordV = (EditText) findViewById(R.id.tvPasswordV);
         tvBirthDate = (EditText) findViewById(R.id.tvBirthDate);
+/*
+        tvUsername.setText("gggh");
+        tvEmail.setText("sad@sad.cs");
+        tvPassword.setText("dddddd");
+        tvPasswordV.setText("dddddd");
+        tvBirthDate.setText("1990-10-10");*/
     }
 
 

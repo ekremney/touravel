@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.touravel.app.MainActivity;
 import com.example.touravel.app.ProfileActivity;
 import com.example.touravel.app.RegisterActivity;
 import com.example.touravel.app.SplashScreen;
@@ -94,7 +95,7 @@ public class AsyncCreateUser  extends AsyncTask<String, Void, Void> {
     {
         if(responseCode >=200 && responseCode < 300)
         {
-            Intent intent = new Intent(RegisterActivity.cnt, ProfileActivity.class);
+            Intent intent = new Intent(RegisterActivity.cnt, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             RegisterActivity.cnt.startActivity(intent);
 

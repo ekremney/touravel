@@ -27,11 +27,6 @@ public class TimelineActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
-        TextView t = (TextView) findViewById(R.id.TimelineTV);
-        t.setText("Location number: " + BackgroundService.curRoute.getLocationNo()
-                + "\nFile content:\n" + Route.readFile());
-
         CustomTimelineList adapterTimeline = new CustomTimelineList(getParent(), dummyList);
 
         ListView timeLineList = (ListView) findViewById(R.id.timelineListView);

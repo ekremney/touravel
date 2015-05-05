@@ -28,8 +28,9 @@ public class BackgroundService extends Service implements
     public static Location lastLocation = null;
     public static String CURRENT_FILE_NAME = null;
     public static String DIRECTORY_NAME = null;
-    public static double MIN_DISTANCE_BTW_LOCS = 13;
-    public static double MAX_ACCURACY = 10;
+    public static double MIN_DISTANCE_BTW_LOCS = 20;
+    public static double MAX_DISTANCE_BTW_LOCS = 200;
+    public static double MAX_ACCURACY = 20;
     public static double STOP_TIME = 30*60*100;
     public static double STOP_DISTANCE = 50;
     public static long CHECK_INTERVAL = 5*1000;
@@ -47,6 +48,7 @@ public class BackgroundService extends Service implements
 
     @Override
     public void onCreate() {
+        //print("Service is created.");
         theLocationClient = new GoogleApiClient.Builder(getApplicationContext())
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -79,7 +81,8 @@ public class BackgroundService extends Service implements
     @Override
     public void onLocationChanged(Location location) {
         if(location.getAccuracy() < MAX_ACCURACY && (lastLocation == null ||
-                (lastLocation != null && lastLocation.distanceTo(location) > MIN_DISTANCE_BTW_LOCS))) {
+                (lastLocation != null && lastLocation.distanceTo(location) > MIN_DISTANCE_BTW_LOCS
+                && lastLocation != null && lastLocation.distanceTo(location) < MAX_DISTANCE_BTW_LOCS))) {
 
             boolean stopStart = false, stopStop = true;
             int i, j;
@@ -136,13 +139,15 @@ public class BackgroundService extends Service implements
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        //print("Service is started.");
         theLocationClient.connect();
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        print("Service is dead.");
+        //print("Service is stopped.");
+        theLocationClient.disconnect();
     }
 
     @Override
