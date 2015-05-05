@@ -107,7 +107,6 @@ public class AsyncEditProfile extends AsyncTask<String, Void, Void> {
 
             Toast.makeText(SplashScreen.cnt, message , Toast.LENGTH_LONG).show();
         }
-
     }
 
 }
