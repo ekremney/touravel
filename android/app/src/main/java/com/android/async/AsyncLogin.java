@@ -83,7 +83,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
-        Toast.makeText(SplashScreen.cnt, ""+responseCode, Toast.LENGTH_LONG).show();
+        //Toast.makeText(SplashScreen.cnt, ""+responseCode, Toast.LENGTH_LONG).show();
         Log.i("POST-Response", ""+responseCode);
 
 
@@ -117,7 +117,7 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
             LoginActivity.cnt.startActivity(intent);
 
             LoginActivity.showProgress(false);
-            Toast.makeText(SplashScreen.cnt, "Logged In" , Toast.LENGTH_LONG).show();
+            //Toast.makeText(SplashScreen.cnt, "Logged In" , Toast.LENGTH_LONG).show();
 
         }
         else

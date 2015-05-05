@@ -143,7 +143,7 @@ public class LoginActivity extends Activity {
 
         boolean cancel = false;
         View focusView = null;
-
+        /*
         // Check for a valid password.
         if (TextUtils.isEmpty(mPassword)) {
             mPasswordView.setError(getString(R.string.error_field_required));
@@ -181,11 +181,15 @@ public class LoginActivity extends Activity {
 
             String url = getResources().getString(R.string.url_login);
 
-            new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
-
+            //new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
+            new AsyncLogin().execute(url, "mobile@gmail.com", "123");
 
         }
+        */
+        String url = getResources().getString(R.string.url_login);
 
+        //new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
+        new AsyncLogin().execute(url, "mobile@gmail.com", "123");
     }
 
     /**
