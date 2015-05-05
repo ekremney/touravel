@@ -43,13 +43,15 @@ public class AsyncPostRoute extends AsyncTask<String, Void, Void> {
             url = params[0];
             authKey = params[1];
 
-            jsonObj = new JSONObject
-            (
+            jsonObj = new JSONObject(params[2]);
+                    /*
                 "{" +
-                        "\"day\":\"" + params[2] + "\"," +
-                        "\"data\":\"" + params[3] + "\"" +
+                        "\"username\":\"" + params[2] + "\"," +
+                        "\"day\":\"" + params[3] + "\"," +
+                        "\"route\":\"" + params[4] + "\"," +
+                        "\"stops\":\"" + params[5] + "\"" +
                 "}"
-            );
+                */
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);

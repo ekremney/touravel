@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,11 +39,17 @@ public class TimelineActivity extends ActionBarActivity {
             tanımlayabilirsiniz. Yeni veri geldikçe arrayi güncelleyin dummy arrayinizi mesala sonra. notifyDataSetChabged diceksiniz listview da.
          */
 
-
+        findViewById(R.id.refreshButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                receiveTimeline();
+            }
+        });
     }
 
-<<<<<<< Updated upstream
+    public void receiveTimeline(){
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,6 +70,4 @@ public class TimelineActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-=======
->>>>>>> Stashed changes
 }
