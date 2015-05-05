@@ -37,6 +37,7 @@ public class ProfileActivity extends ActionBarActivity {
 
                 Intent intent = new Intent(ProfileActivity.this, TimelineActivity.class);
                 startActivity(intent);
+                //setContentView(R.layout.crew_layout);
             }
         });
 
@@ -46,6 +47,7 @@ public class ProfileActivity extends ActionBarActivity {
                 // following'e basınca yapılacaklar.
                 Intent intent = new Intent(ProfileActivity.this, TimelineActivity.class);
                 startActivity(intent);
+                //setContentView(R.layout.following_layout);
             }
         });
 
@@ -55,6 +57,7 @@ public class ProfileActivity extends ActionBarActivity {
                 // followers'a basınca yapılacaklar.
                 Intent intent = new Intent(ProfileActivity.this, TimelineActivity.class);
                 startActivity(intent);
+                //setContentView(R.layout.followed_layout);
             }
         });
 
