@@ -32,6 +32,7 @@ public class AsyncChangeEmail extends AsyncTask<String, Void, Void> {
     protected String url = null;
     protected String authKey = null;
     protected String responseStr = null;
+    protected int responseCode = 0;
     protected int TIMEOUT_MILLISEC = 10000;
 
     @Override
@@ -48,12 +49,12 @@ public class AsyncChangeEmail extends AsyncTask<String, Void, Void> {
             authKey = params[1];
 
             jsonObj = new JSONObject
-            (
-                "{" +
-                        "\"email\":\"" + params[2] + "\"," +
-                        "\"email_again\":\"" + params[3] + "\"" +
-                "}"
-            );
+                    (
+                            "{" +
+                                    "\"email\":\"" + params[2] + "\"," +
+                                    "\"email_again\":\"" + params[3] + "\"" +
+                                    "}"
+                    );
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -68,6 +69,7 @@ public class AsyncChangeEmail extends AsyncTask<String, Void, Void> {
 
             HttpResponse response = client.execute(request);
             responseStr = EntityUtils.toString(response.getEntity());
+            responseCode = response.getStatusLine().getStatusCode();
         }
 
         catch (IOException e)
@@ -90,23 +92,24 @@ public class AsyncChangeEmail extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
-        Toast.makeText(SplashScreen.cnt, jsonObj.toString(), Toast.LENGTH_LONG).show();
-        Log.i("POST", authKey + " | " + jsonObj.toString());
-        Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
-        Log.i("POST-Response", responseStr);
 
-        boolean state = (responseStr.indexOf("error") > 0 );
-        /*
-           responseStr içindeki message kısmını alarak aşagıdaki error'un peşine ekleyin.
-         */
-        if(!state)
+        if(responseCode >=200 && responseCode < 300)
         {
-            Toast.makeText(SplashScreen.cnt, "Email has been changed" , Toast.LENGTH_LONG).show();
+            Toast.makeText(SplashScreen.cnt, "Email has been changed successfully" , Toast.LENGTH_LONG).show();
             SettingsActivity.clearEmailForm();
         }
         else
         {
-            Toast.makeText(SplashScreen.cnt, "Error !" , Toast.LENGTH_LONG).show();
+            String message;
+            try {
+                JSONObject reader = new JSONObject(responseStr);
+                message = reader.getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                message = "An error occurred!";
+            }
+
+            Toast.makeText(SplashScreen.cnt, message , Toast.LENGTH_LONG).show();
         }
 
     }
