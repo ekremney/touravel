@@ -97,6 +97,30 @@
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:gravity="center"
+                android:text="Application Settings"
+                android:textSize="20dp"/>
+
+            <LinearLayout
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Background Usage"
+                    android:id="@+id/switch1"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
