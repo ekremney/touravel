@@ -18,6 +18,7 @@ public class SplashScreen extends Activity {
     private static final int SPLASH_DURATION = 3000;
 
     public static String username_email, auth;
+    public static User user;
     public static Context cnt;
 
     public static void setAuth(String auth) {
