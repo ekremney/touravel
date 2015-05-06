@@ -60,17 +60,24 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     public GoogleMap theMap;
     boolean toZoom;
+    boolean drawMode = false;
     public Location theLocation = null;
+    Route r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        Intent intent = getIntent();
+        r = Route.fromString(intent.getExtras().getString("route"));
+        if(r != null)
+            drawMode = true;
 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        registerReceiver(broadcastReceiver, new IntentFilter(BackgroundService.BROADCAST_ACTION));
+        if(!drawMode)
+            registerReceiver(broadcastReceiver, new IntentFilter(BackgroundService.BROADCAST_ACTION));
 
         toZoom = true;
     }
@@ -83,7 +90,9 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         theMap.setOnMapClickListener(this);
         theMap.setOnMapLongClickListener(this);
         moveCam(30.0, 37.0, 2.0);
-
+        if(drawMode)
+            r.draw(theMap);
+        else
         if(BackgroundService.curRoute.getLocationNo() > 0){
             BackgroundService.curRoute.draw(theMap);
             theLocation = BackgroundService.curRoute.getLocation(BackgroundService.curRoute.getLocationNo() - 1);

@@ -15,11 +15,10 @@ public class SplashScreen extends Activity {
 
     // used to know if the back button was pressed in the splash screen activity and avoid opening the next activity
     private boolean mIsBackButtonPressed;
-    private static final int SPLASH_DURATION = 3000; // 2 seconds
+    private static final int SPLASH_DURATION = 3000;
 
-
-    public static Context cnt;
     public static String username_email, auth;
+    public static Context cnt;
 
     public static void setAuth(String auth) {
         SplashScreen.auth = auth;
@@ -35,7 +34,6 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.act_splas);
 
         cnt = getApplicationContext();
-
 
 
 

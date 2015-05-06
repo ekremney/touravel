@@ -1,11 +1,11 @@
 package com.android.async;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.touravel.app.SettingsActivity;
 import com.example.touravel.app.SplashScreen;
+import com.example.touravel.app.TimelineActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -21,8 +21,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-
-public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
+/**
+ * Created by gokg on 6.5.2015.
+ */
+public class AsyncLike extends AsyncTask<String, Void, Void> {
 
     protected JSONObject jsonObj = null;
     protected String url = null;
@@ -44,14 +46,6 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
             url = params[0];
             authKey = params[1];
 
-            jsonObj = new JSONObject
-                    (
-                            "{" +
-                                    "\"post_type\":\"" + params[2] + "\"," +
-                                    "\"data\":\"" + params[3] + "\"" +
-                                    "}"
-                    );
-
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
             HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -60,7 +54,7 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
             HttpPost request = new HttpPost(url);
 
             request.setHeader("auth-key", authKey);
-            request.setHeader("Content-Type","application/json");
+            request.setHeader("post_id",params[2]);
             request.setEntity(new ByteArrayEntity(jsonObj.toString().getBytes("UTF8")));
 
             HttpResponse response = client.execute(request);
@@ -69,10 +63,6 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
         }
 
         catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch (JSONException e)
         {
             e.printStackTrace();
         }
@@ -90,8 +80,13 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
     {
         if(responseCode >=200 && responseCode < 300)
         {
-            Toast.makeText(SplashScreen.cnt, "ro" , Toast.LENGTH_LONG).show();
-            SettingsActivity.clearEditProfileForm();
+            JSONObject reader = null;
+            try {
+                reader = new JSONObject(responseStr);
+                //TimelineActivity.likes[position] = reader.getString("like_amount");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         else
         {

@@ -17,7 +17,7 @@
 
         <Button
             android:text="Refresh"
-            android:id="@+id/refreshButton"
+            android:id="@+id/timeline_refresh"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -90,18 +90,24 @@ public class AsyncGetTimeline extends AsyncTask<String, Void, Void> {
                 JSONObject reader, fetched;
                 reader = new JSONObject(responseStr);
                 ArrayList<String> users = new ArrayList<String>();
+                ArrayList<String> ids = new ArrayList<String>();
                 ArrayList<String> avatars = new ArrayList<String>();
                 ArrayList<String> types = new ArrayList<String>();
                 ArrayList<String> data = new ArrayList<String>();
                 ArrayList<String> likes = new ArrayList<String>();
                 for (int i = 0; i < reader.length(); i++) {
                     fetched = reader.getJSONObject("" + i);
+                    ids.add(fetched.getString("post_id"));
                     users.add(fetched.getString("name"));
                     avatars.add(fetched.getString("avatar_thumb"));
                     types.add(fetched.getString("post_type"));
                     data.add(fetched.getString("data"));
                     likes.add(fetched.getString("like_amount"));
                 }
+
+                TimelineActivity.ids = new String[ids.size()];
+                for (int i = 0; i < ids.size(); i++)
+                    TimelineActivity.ids[i] = ids.get(i);
 
                 TimelineActivity.users = new String[users.size()];
                 for (int i = 0; i < users.size(); i++)

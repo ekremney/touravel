@@ -14,13 +14,13 @@
 
         <ImageView
             android:layout_gravity="left"
-            android:id="@+id/timeline_avatar"
+            android:id="@+id/line_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher"/>
 
         <TextView
-            android:id="@+id/timeline_name"
+            android:id="@+id/line_name"
             android:paddingLeft="20dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/timeline_text"/>
+        android:id="@+id/line_text"/>
 
     <View
         android:layout_width="match_parent"
