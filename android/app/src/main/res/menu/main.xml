@@ -9,4 +9,9 @@
         android:title="@string/action_search"
         tools:showAsAction="always" />
 
+    <item android:id="@+id/action_logout"
+        android:icon="@drawable/search_normal"
+        android:title="@string/action_logout"
+        tools:showAsAction="always" />
+
 </menu>

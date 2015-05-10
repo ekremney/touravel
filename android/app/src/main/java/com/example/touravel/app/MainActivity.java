@@ -73,6 +73,10 @@ public class MainActivity extends TabActivity {
                 Intent intent = new Intent(this, ListUsersActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.action_logout:
+                Intent logout_intent = new Intent(this, SettingsActivity.class);
+                startActivity(logout_intent);
+                break;
             default:
                 break;
         }
