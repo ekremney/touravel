@@ -1,26 +1,21 @@
 package com.example.touravel.app;
 
-        import android.app.TabActivity;
-        import android.content.Intent;
-        import android.graphics.Color;
-        import android.os.Bundle;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.ImageView;
-        import android.widget.TabHost;
-        import android.widget.TabWidget;
-        import android.widget.TextView;
-        import android.widget.Toast;
-
+import android.app.TabActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TabHost;
+import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
     TabHost tabHost;
     /** Called when the activity is first created. */
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +24,7 @@ public class MainActivity extends TabActivity {
         tabHost = getTabHost();
         setTabs();
     }
+
     private void setTabs()
     {
         addTab("Profile", R2.drawable.tab_home, ProfileActivity.class);
@@ -37,6 +33,7 @@ public class MainActivity extends TabActivity {
         addTab("Storyline", R2.drawable.tab_home, StorylineActivity.class);
         addTab("Settings", R2.drawable.tab_search, SettingsActivity.class);
     }
+
     private void addTab(String labelId, int drawableId, Class<?> c)
     {
         Intent intent = new Intent(this, c);
@@ -50,11 +47,6 @@ public class MainActivity extends TabActivity {
         spec.setIndicator(tabIndicator);
         spec.setContent(intent);
         tabHost.addTab(spec);
-    }
-    public void openMapActivity(View b)
-    {
-        Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -74,7 +66,7 @@ public class MainActivity extends TabActivity {
                 startActivity(intent);
                 break;
             case R.id.action_logout:
-                Intent logout_intent = new Intent(this, SettingsActivity.class);
+                Intent logout_intent = new Intent(this, LoginActivity.class);
                 startActivity(logout_intent);
                 break;
             default:
