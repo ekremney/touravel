@@ -18,5 +18,12 @@
         android:id="@+id/user_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#eb1849af"
+        android:textColor="#ffffffff"
+        android:text="Go To Profile" />
 
 </LinearLayout>

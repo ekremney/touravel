@@ -64,6 +64,8 @@ public class LoginActivity extends Activity {
     String attempMail = "";
     String attempPass = "";
 
+    private boolean mIsBackButtonPressed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,8 +239,10 @@ public class LoginActivity extends Activity {
 
     private void launchRegisterActivity()
     {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        //if(!mIsBackButtonPressed){
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            LoginActivity.this.startActivity(intent);
+        //}
     }
 
     @Override
@@ -248,4 +252,13 @@ public class LoginActivity extends Activity {
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
     }
+
+    /*@Override
+    public void onBackPressed() {
+
+        // set the flag to true so the next activity won't start up
+        mIsBackButtonPressed = true;
+        super.onBackPressed();
+
+    }*/
 }

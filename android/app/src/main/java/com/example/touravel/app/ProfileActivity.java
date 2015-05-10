@@ -102,16 +102,16 @@ public class ProfileActivity extends ActionBarActivity implements ProfileInterfa
         btn_routes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
-               // startActivity(intent);
+               Intent intent = new Intent(ProfileActivity.this, StorylineActivity.class);
+               startActivity(intent);
             }
         });
 
         text_routes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
-               // startActivity(intent);
+                Intent intent = new Intent(ProfileActivity.this, StorylineActivity.class);
+                startActivity(intent);
             }
         });
 
