@@ -34,8 +34,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:textStyle="italic"
-            android:textColor="#ffe2cb9e"
-            android:layout_marginTop="4dp" />
+            android:textColor="#ffe2cb9e" />
     </LinearLayout>
 
     <LinearLayout
