@@ -38,7 +38,23 @@ public class ListUsersActivity extends ActionBarActivity implements OnTaskComple
         cnt = getApplicationContext();
         tvUsernameSearch = (EditText) findViewById(R.id.usernameSearch);
         userlist = (ListView) findViewById(R.id.userlist);
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
 
     public void btnOnClick(View v) {
         switch(v.getId()) {
