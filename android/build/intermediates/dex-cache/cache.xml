@@ -2,172 +2,172 @@
 <items version="2" >
 
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-f041011cd37b098279061e9cd081f02746ec0057.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-43c4b13a8946ea0fe5480cb16d7a3ad3349a1bfc.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-83da99427fe96348f2c261dc82e120336d3d4a67.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-2af898fe730c326ccff139c35126b584e0ea655d.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-028a02e957763be11333d10df69514537e765acf.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-e4d0de3d3500d4d33eb1a444c123993952bbbe44.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-38274812ab5c02298267ffd6837ea4e0ddac492c.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-bf51825387b4af1f1b9946aa8b063e902c44ff33.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-40c15be0e7adb35de8874890c1982a3914e41484.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-8cc5dd0759107d47e2c3a749a3d25b098707f701.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-c2310535fb9b168a7c80c15c20853df55f60575b.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-8581858bbc9c8aa9776900d05e350a998112c230.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-7f5ff77326b877a2f054ee4be3b77ec86bbb8fbf.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="565a01f90f1529f73362707c4c185d0623a68782">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-b2eb72b7b3a23fd3a4e7e02c1a9d92bf347ee4b0.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/android-sdks/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-b2c2c074b5c5acb1b6322467818edeb9d954b851.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-eb8f08b0fc7229b442978f9ce2c8be3bdbba55aa.jar" />
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-b8ccfa54be249b8d3505d3c73293a98df42d8924.jar" />
     </item>
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.3.0/classes.jar"
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-7adcc6275101095f5d78eff02db7173303224737.jar" />
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-9400802cb25c0a71ff010bdf2a70fc7444dea238.jar" />
     </item>
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.3.0/classes.jar"
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-961c0210c171534ed550e9deca908344668f96aa.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-5170d0f6ed5a17198cc5a382396ed46a904c6777.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-7c3e0469a9e5f58d05f4d4f28a1732b4a108161f.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-2f511c85158a861ca438513b5b149045318a6dd1.jar" />
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-5701c1dfbccd00e450b6353d4ee3423c8b6ddaa1.jar" />
     </item>
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-cf6487175bbd2c113c578adf383f04e104e3fbf0.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.3.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-8218d75629ec325ecebaf594d708e8c256fde2fe.jar" />
-    </item>
-    <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.3.0/classes.jar"
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-92b74e056b02f0ef6c6646d19937bb8f089341eb.jar" />
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-56839e2f285a7e170e80660f3948bd03db3877e9.jar" />
     </item>
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/classes.jar"
+        jar="C:\Program Files\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-f55eccf9f83447f5b4111b29767bf87b2f824c85.jar" />
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-8c820441c10309bd648a271c070f597782dafcb7.jar" />
     </item>
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.3.0/classes.jar"
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-a74e612ecb87a6a22ffb983b20be3c3478de3c9d.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-9d50d07d7abd5caf9a956752eb5987d695f271cb.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-80b54f2307267f61f87473edd60bc156f1757147.jar" />
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-175f5748555cb7e1c28ead63a90d444fa7125766.jar" />
     </item>
     <item
-        jar="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-f61b01725aa0da58443d9d3aa85ac3a0476322b3.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-ff7b08cfbfdabeddc30ce73da1cde1f565afa863.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-57d3f009220bc3f6c7aa5ffc4798624e71002197.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-a5f1dde86953fe6e229e5f15f77c2d700f17e01e.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/gokhancs/Desktop/demorepo/touravel/android/app/build/intermediates/pre-dexed/debug/classes-c39370d16b97fa5abf7159a205a1e8761405ff07.jar" />
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-9d223a3fee996a032e5848ca58845d0b8c00ac3c.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-da13efb6d387756abaf296bc026bd020c5c0b38a.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-f871fd0121fe826ef35ecc09a7dedc91ba0f93ec.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-b7744ef98d1a0b5875cf9a73b9733b322aeda0ed.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-365e42fa1b4b70da9561a09930d46c65458d0625.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-748f21a47f44a9b958fab7d50d9816b91b75c8e5.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-d64ff9639dd33012967ef37f02f4a2e5b5a813e7.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-6b0c4ce69b2278dc670aa62dd3eb5a13c6863ffb.jar" />
+    </item>
+    <item
+        jar="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="C:\Users\MüslimBahadır\Desktop\android\app\build\intermediates\pre-dexed\debug\classes-07bd909cb41cf98d6e70d8743e2035296aadae83.jar" />
     </item>
 
 </items>

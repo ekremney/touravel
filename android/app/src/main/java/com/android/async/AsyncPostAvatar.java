@@ -28,8 +28,10 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
 
     protected JSONObject jsonObj = null;
     protected String url = null;
+    protected String authKey = null;
     protected String responseStr = null;
     protected int TIMEOUT_MILLISEC = 10000;
+    protected int responseCode = 0;
 
     @Override
     protected void onPreExecute()
@@ -42,12 +44,16 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
         try
         {
             url = params[0];
+            authKey = params[1];
+
             jsonObj = new JSONObject
             (
                 "{" +
-                        "\"data\":\"" + params[1] + "\"" +
+                        "\"data\":\"" + params[2] + "\"" +
                 "}"
             );
+
+            System.out.println(""+params[2]);
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -57,10 +63,14 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
             HttpPost request = new HttpPost(url);
 
             request.setHeader("Content-Type","application/json");
+            request.setHeader("auth-key", authKey);
             request.setEntity(new ByteArrayEntity(jsonObj.toString().getBytes("UTF8")));
 
             HttpResponse response = client.execute(request);
             responseStr = EntityUtils.toString(response.getEntity());
+            responseCode = response.getStatusLine().getStatusCode();
+
+
 
         }
 
@@ -85,7 +95,8 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
     protected void onPostExecute(Void param)
     {
 
-
+        Log.e("postExecute", ""+responseCode);
+        Log.e("hebele", responseStr);
     }
 
 }
