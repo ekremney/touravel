@@ -207,7 +207,7 @@ class User(db.Model):
 		return user.avatar
 
 	def post_route(self, json_post):
-		if json_post.get('day') is None or json_post.get('route') is None or json_post.get('stops'):
+		if json_post.get('day') is None or json_post.get('route') is None or json_post.get('stops') is None:
 			raise ValidationError('JSON should have all fields')
 		day = json_post.get('day')
 		route = json_post.get('route')
