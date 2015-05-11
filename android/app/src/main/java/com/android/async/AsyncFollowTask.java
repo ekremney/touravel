@@ -23,11 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by barin.huseyin on 5/10/2015.
- */
 public class AsyncFollowTask extends AsyncTask<String, Void, Void> {
-
 
     protected int TIMEOUT_MILLISEC = 10000;
     protected JSONObject jsonObj = null;
@@ -37,16 +33,13 @@ public class AsyncFollowTask extends AsyncTask<String, Void, Void> {
     protected int responseCode = 0;
     private OnTaskCompleted listener;
 
-
     public AsyncFollowTask(OnTaskCompleted listener) {
         this.listener = listener;
     }
 
-
     @Override
     protected void onPreExecute() {
     }
-
 
     @Override
     protected Void doInBackground(String... params) {
@@ -54,11 +47,9 @@ public class AsyncFollowTask extends AsyncTask<String, Void, Void> {
         url = params[0];
         authKey = params[1];
 
-
         HttpParams httpParams = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
         HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLISEC);
-
 
         HttpClient client = new DefaultHttpClient(httpParams);
         HttpGet request = new HttpGet(url);
@@ -75,13 +66,10 @@ public class AsyncFollowTask extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-
         Log.i("GET", "auth-key -> " + params[1]);
-
 
         return null;
     }
-
 
     @Override
     protected void onPostExecute(Void aVoid) {
@@ -119,7 +107,6 @@ public class AsyncFollowTask extends AsyncTask<String, Void, Void> {
                 e.printStackTrace();
                 message = "An error occurred!";
             }
-
 
         }
     }
