@@ -24,17 +24,8 @@ android:layout_height="fill_parent" >
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0" />
+            android:layout_weight="0.015" />
     </LinearLayout>
 </TabHost>
-    <!--
-    <ImageButton
-        android:layout_width="70sp"
-        android:layout_height="70sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/center_tab_indicator"
-        android:onClick="openMapActivity"
-        android:src="@drawable/camera" />
-    -->
+
 </RelativeLayout>

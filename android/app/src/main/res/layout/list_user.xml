@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b0209300">
+    android:background="#8d61ffb2">
 
     <ImageView
         android:id="@+id/user_avatar"
@@ -24,18 +24,16 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:textStyle="bold"
-            android:textColor="#fffff2cc"
-            android:layout_margin="5dp"
+            android:textColor="#ff7b0006"
             android:layout_marginTop="4dp" />
         <TextView
             android:id="@+id/user_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="13dp"
             android:textStyle="italic"
-            android:textColor="#ffe2cb9e"
-            android:layout_marginTop="4dp" />
+            android:textColor="#ffff0021" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,7 +46,7 @@
             android:id="@+id/user_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#eb1849af"
+            android:background="#eb1100a3"
             android:textColor="#ffffffff"
             android:text=">"
             android:layout_gravity="right" />

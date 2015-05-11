@@ -10,6 +10,7 @@ import com.example.touravel.app.MainActivity;
 import com.example.touravel.app.ProfileActivity;
 import com.example.touravel.app.RegisterActivity;
 import com.example.touravel.app.SplashScreen;
+import com.example.touravel.app.User;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,16 +20,19 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AsyncLogin extends AsyncTask<String, Void, Void> {
 
     protected String url = null;
     protected int responseCode = 0;
+    protected String responseStr = null;
     protected String responseAuth = null;
     protected int TIMEOUT_MILLISEC = 10000;
     protected String tempUsr;
@@ -58,8 +62,8 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
             request.setHeader("password", params[2]);
 
             HttpResponse response = client.execute(request);
+            responseStr = EntityUtils.toString(response.getEntity());
             responseCode = response.getStatusLine().getStatusCode();
-            responseAuth = EntityUtils.toString(response.getEntity());
 
             Log.i("GET", "email -> " + params[1]);
             Log.i("GET", "password -> " + params[2]);
@@ -94,17 +98,16 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
         Log.i("state", ""+state);
         if(state)
         {
-            String auth = responseAuth;
-            Log.i("responseAuth", ""+responseAuth);
-            int i = auth.indexOf("auth-key");
+            String auth = "";
+            JSONObject reader;
+            try {
+                reader = new JSONObject(responseStr);
+                auth = reader.getString("auth-key");
 
-
-
-            auth = auth.substring(i+12);
-            auth = auth.substring(0,auth.length()-3);
-
-            Log.i("setAuth", ""+auth);
-
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(SplashScreen.cnt, "A wild error occurred!" , Toast.LENGTH_LONG).show();
+            }
 
             SplashScreen.setAuth(auth);
 
