@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import com.android.async.AsyncPostRoute;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,19 +31,24 @@ public class BackgroundService extends Service implements
     public static String CURRENT_FILE_NAME = null;
     public static String DIRECTORY_NAME = null;
     public static double MIN_DISTANCE_BTW_LOCS = 20;
-    public static double MAX_DISTANCE_BTW_LOCS = 200;
+    public static double MAX_DISTANCE_BTW_LOCS = 9999;//200;
     public static double MAX_ACCURACY = 20;
-    public static double STOP_TIME = 30*60*100;
+    public static double STOP_TIME = 5*60*100;
     public static double STOP_DISTANCE = 50;
     public static long CHECK_INTERVAL = 5*1000;
     public static long FAST_CHECK_INTERVAL = 3*1000;
     public static Route curRoute;
-    public static String username = "username";
+    public static String username = null;
     public static Calendar today;
+    public static String dayText;
     public static int day;
     public static int month;
     public static int year;
     File f;
+
+    public static Route tempRoute;
+    public static LatLng tempLoc;
+    public static boolean tempType;
 
     public static final String BROADCAST_ACTION = "com.example.touravel.app.broadcast";
     Intent intent;
@@ -65,20 +72,21 @@ public class BackgroundService extends Service implements
         month = today.get(Calendar.MONTH) + 1;
         year = today.get(Calendar.YEAR);
 
+        dayText = year + "-" +  month + "-" + day;
         username = SplashScreen.username_email;
 
         intent = new Intent(BROADCAST_ACTION);
         DIRECTORY_NAME = getFilesDir() + "";
-        CURRENT_FILE_NAME = DIRECTORY_NAME + "/" + username + day + "-" + month + "-" + year;
+        CURRENT_FILE_NAME = DIRECTORY_NAME + "/" + dayText;
 
         f = new File(CURRENT_FILE_NAME);
-        if(f.exists() && Route.readFile() != null && f.length() > 56
+        if(f.exists() && Route.readFile() != null && f.length() > 20
                 && Route.fromString(Route.readFile()).getLocationNo() > 0) {
             curRoute = Route.fromString(Route.readFile());
             lastLocation = curRoute.getLocation(curRoute.getLocationNo() - 1);
         }
         else
-            curRoute = new Route(username, day, month, year);
+            curRoute = new Route();
     }
 
     @Override
@@ -108,7 +116,7 @@ public class BackgroundService extends Service implements
 
             lastLocation = location;
             if(curRoute == null)
-                curRoute = new Route(username, day, month, year);
+                curRoute = new Route();
             curRoute.addLocation(lastLocation);
             saveLocation();
             broadcastLoc();
@@ -132,6 +140,11 @@ public class BackgroundService extends Service implements
     private void broadcastLoc() {
         intent.putExtra("location", Route.locToString(lastLocation));
         sendBroadcast(intent);
+    }
+
+    public static void sendRoute(){
+        new AsyncPostRoute().execute(SplashScreen.cnt.getResources().getString(R.string.url_post_route),
+                SplashScreen.auth, dayText, curRoute.getLocations(), curRoute.getStops());
     }
 
     public void print(String text){

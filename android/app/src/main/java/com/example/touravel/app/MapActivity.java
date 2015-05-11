@@ -60,26 +60,21 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     public GoogleMap theMap;
     boolean toZoom;
-    boolean drawMode = false;
     public Location theLocation = null;
     Route r;
+    int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        Intent intent = getIntent();
-        r = Route.fromString(intent.getExtras().getString("route"));
-        if(r != null)
-            drawMode = true;
-
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        if(!drawMode)
-            registerReceiver(broadcastReceiver, new IntentFilter(BackgroundService.BROADCAST_ACTION));
+        registerReceiver(broadcastReceiver, new IntentFilter(BackgroundService.BROADCAST_ACTION));
 
         toZoom = true;
+        count = 0;
     }
 
     @Override
@@ -90,9 +85,7 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         theMap.setOnMapClickListener(this);
         theMap.setOnMapLongClickListener(this);
         moveCam(30.0, 37.0, 2.0);
-        if(drawMode)
-            r.draw(theMap);
-        else
+
         if(BackgroundService.curRoute.getLocationNo() > 0){
             BackgroundService.curRoute.draw(theMap);
             theLocation = BackgroundService.curRoute.getLocation(BackgroundService.curRoute.getLocationNo() - 1);
@@ -103,13 +96,25 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     @Override
     public void onMapClick(LatLng point) {
+        /*
+        Location loc = new Location("fused");
+        loc.setLatitude(point.latitude);
+        loc.setLongitude(point.longitude);
+        BackgroundService.curRoute.addLocation(loc);
+        if(count%3 == 0)
+            BackgroundService.curRoute.addStop(loc);
+        BackgroundService.curRoute.draw(theMap);
+        count++;
+        */
     }
 
 
     @Override
     public void onMapLongClick(LatLng point) {
+        /*
+        BackgroundService.sendRoute();
         BackgroundService.curRoute.delete();
-        print("Route deleted.");
+        */
     }
 
 
@@ -131,12 +136,12 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         unregisterReceiver(broadcastReceiver);
     }
 
-    public void putDot(double  latitude, double longitude){
-        theMap.addCircle(new CircleOptions()
+    public static void putDot(GoogleMap map, double  latitude, double longitude){
+        map.addCircle(new CircleOptions()
                 .center(new LatLng(latitude, longitude))
                 .radius(10)
-                .strokeColor(Color.RED)
-                .fillColor(Color.RED));
+                .strokeColor(Route.DRAW_COLOR)
+                .fillColor(Route.DRAW_COLOR));
     }
 
     public void putMarker(double  latitude, double longitude, String text){

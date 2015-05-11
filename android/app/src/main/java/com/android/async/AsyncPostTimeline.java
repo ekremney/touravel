@@ -90,8 +90,7 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
     {
         if(responseCode >=200 && responseCode < 300)
         {
-            Toast.makeText(SplashScreen.cnt, "ro" , Toast.LENGTH_LONG).show();
-            SettingsActivity.clearEditProfileForm();
+            Toast.makeText(SplashScreen.cnt, "Post shared." , Toast.LENGTH_LONG).show();
         }
         else
         {

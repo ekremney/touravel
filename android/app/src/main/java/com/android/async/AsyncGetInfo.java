@@ -112,7 +112,7 @@ public class AsyncGetInfo extends AsyncTask<String, Void, Void> {
     {
         if(responseCode >=200 && responseCode < 300)
         {
-            Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
+            //Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
             listener.onTaskCompleted(responseStr);
         }
         else

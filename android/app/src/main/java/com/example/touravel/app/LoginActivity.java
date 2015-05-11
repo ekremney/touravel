@@ -118,7 +118,7 @@ public class LoginActivity extends Activity {
 
         ((TextView)findViewById(R.id.email)).setText("g@g.com");
         ((TextView)findViewById(R.id.password)).setText("gggggg");
-        attemptLogin();
+        //attemptLogin();
     }
 
 
@@ -192,8 +192,8 @@ public class LoginActivity extends Activity {
         */
         String url = getResources().getString(R.string.url_login);
 
-        //new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
-        new AsyncLogin().execute(url, "mobile@gmail.com", "123");
+        new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
+        //new AsyncLogin().execute(url, "mobile@gmail.com", "123");
     }
 
     /**

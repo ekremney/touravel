@@ -61,14 +61,12 @@ public class StorylineActivity extends ActionBarActivity implements OnTaskComple
                 storyLineList.setAdapter(adapterTimeline);
 
             }
-        }).execute(getResources().getString(R.string.url_get_route), SplashScreen.auth,
-                BackgroundService.year + "-" + BackgroundService.month + "-" + BackgroundService.day);
+        }).execute(getResources().getString(R.string.url_get_route), SplashScreen.auth, BackgroundService.dayText);
 
     }
 
     public void share(int pos){
-        new AsyncPostTimeline().execute(getResources().getString(R.string.url_post_route),
-                SplashScreen.auth, types[pos], data[pos]);
+
     }
 
     @Override

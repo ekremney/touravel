@@ -41,6 +41,7 @@
     <string name="title_activity_list_users">ListUsersActivity</string>
     <string name="url_get_info">http://narlab.webfactional.com/api/v1.0/user</string>
     <string name="title_activity_a">FollowResultActivity</string>
+    <string name="title_activity_show_on_map">Touravel</string>
 
 
 </resources>

@@ -31,31 +31,19 @@ public class Route {
     private Polyline line = null;
     private PolylineOptions lineOptions = null;
     public static final int CIRCLE_RADIUS = 3;
-    public static final int ROUTE_COLOR = Color.RED;
+    public static final int DRAW_COLOR = Color.parseColor("#088A08");
     public int lastCheckin;
-    public String username;
-    public int day;
-    public int month;
-    public int year;
 
-    public Route (String user, int d, int m, int y){
+    public Route (){
         locations = new ArrayList<Location>();
         stops = new ArrayList<Location>();
         dots = new ArrayList<Circle>();
         circles = new ArrayList<CircleOptions>();
         lineOptions = new PolylineOptions();
-        username = user;
-        day = d;
-        month = m;
-        year = y;
         lastCheckin = -1;
     }
 
     public Route(Route r){
-        username = r.getUsername();
-        day = r.getDay();
-        month = r.getMonth();
-        year = r.getYear();
         locations = new ArrayList<Location>();
         stops = new ArrayList<Location>();
         circles = new ArrayList<CircleOptions>();
@@ -65,8 +53,8 @@ public class Route {
         for(int i = 0; i < r.getLocationNo(); i++)
             locations.add(r.getLocation(i));
 
-        for(int i = 0; i < r.getStops().size(); i++)
-            stops.add(r.getStops().get(i));
+        for(int i = 0; i < r.getStopList().size(); i++)
+            stops.add(r.getStopList().get(i));
 
         for(int i = 0; i < r.getCircles().size(); i++)
             circles.add((r.getCircles()).get(i));
@@ -79,9 +67,7 @@ public class Route {
     }
 
     public boolean check(Route r){
-        boolean result = (username == r.getUsername() && day == r.getDay() && month == r.getMonth()
-                && year == r.getYear() && getLocationNo() == r.getLocationNo() &&
-                stops.size() == r.getStops().size());
+        boolean result = (getLocationNo() == r.getLocationNo() && stops.size() == r.getStopList().size());
         if(!result)
             return false;
 
@@ -89,8 +75,8 @@ public class Route {
             if(locations.get(i) != r.getLocation(i))
                 result = false;
 
-        for(int i = 0; i < r.getStops().size(); i++)
-            if(stops.get(i) != r.getStops().get(i))
+        for(int i = 0; i < r.getStopList().size(); i++)
+            if(stops.get(i) != r.getStopList().get(i))
                 result = false;
 
         return result;
@@ -101,8 +87,8 @@ public class Route {
         circles.add(new CircleOptions()
                 .center(new LatLng(location.getLatitude(), location.getLongitude()))
                 .radius(CIRCLE_RADIUS)
-                .strokeColor(ROUTE_COLOR)
-                .fillColor(ROUTE_COLOR));
+                .strokeColor(DRAW_COLOR)
+                .fillColor(DRAW_COLOR));
         lineOptions.add(new LatLng(location.getLatitude(), location.getLongitude()));
     }
 
@@ -110,7 +96,7 @@ public class Route {
         stops.add(location);
     }
 
-    public ArrayList<Location> getStops(){
+    public ArrayList<Location> getStopList(){
         return stops;
     }
 
@@ -121,8 +107,8 @@ public class Route {
         for(int i = 0; i < getLocationNo(); i++)
             lineOptions.add(
                     new LatLng(locations.get(i).getLatitude(), locations.get(i).getLongitude()));
-        lineOptions.width((int) (CIRCLE_RADIUS * 4));
-        lineOptions.color(ROUTE_COLOR);
+        lineOptions.width((int) (CIRCLE_RADIUS * 3));
+        lineOptions.color(DRAW_COLOR);
         line = map.addPolyline(lineOptions);
 
 
@@ -158,7 +144,7 @@ public class Route {
         return line;
     }
 
-    public String getUsername(){
+   /* public String getUsername(){
         return username;
     }
 
@@ -172,7 +158,7 @@ public class Route {
 
     public int getYear(){
         return year;
-    }
+    }*/
 
     public Location getLocation(int i){
         return locations.get(i);
@@ -205,42 +191,38 @@ public class Route {
     }
 
     public void delete(){
-        File f = new File(BackgroundService.DIRECTORY_NAME + "/" + username
-                + day + "-" + month + "-" + year);
+        File f = new File(BackgroundService.CURRENT_FILE_NAME);
         if(!f.exists())
             System.out.print("File couldn't be found.");
         else{
             clear();
-            BackgroundService.curRoute = new Route(BackgroundService.username, BackgroundService.day,
-                    BackgroundService.month, BackgroundService.year);
+            BackgroundService.curRoute = new Route();
             f.delete();
         }
     }
 
-    public String toString(){
-        String result = "{\"username\":\"" + username + "\",\"day\":\""
-                + day + "-" + month + "-" + year + "\",\"route\":\"";
+    public String getLocations(){
+        String result = "";
         for(int i = 0; i < locations.size(); i++)
             result += locToString(locations.get(i));
+        return result;
+    }
 
-        result += "\",\"stops\":\"";
+    public String getStops(){
+        String result = "";
         for(int i = 0; i < stops.size(); i++)
             result += locToString(stops.get(i));
-        return result + "\"}";
+        return result;
+    }
+
+    public String toString(){
+        return "\"route\":\"" + getLocations() + "\",\"stops\":\"" + getStops() + "\"";
     }
 
     public static Route fromString(String string){
         String input = string;
-        String user = input.substring(input.indexOf(':') + 2, input.indexOf(',') - 1);
-        input = input.substring(input.indexOf(',') + 1);
-        int d = Integer.parseInt(input.substring(input.indexOf(':') + 2, input.indexOf('-')));
-        input = input.substring(input.indexOf('-') + 1);
-        int m = Integer.parseInt(input.substring(0, input.indexOf('-')));
-        input = input.substring(input.indexOf('-') + 1);
-        int y = Integer.parseInt(input.substring(0, input.indexOf(',') - 1));
-
-        Route r = new Route(user, d, m, y);
-        input = input.substring(input.indexOf(',') + 10);
+        Route r = new Route();
+        input = input.substring(9);
 
         while(input.contains("+\",\"stops")){
             r.addLocation(stringToLoc(input.substring(0, input.indexOf('+') + 1)));
@@ -248,11 +230,10 @@ public class Route {
         }
         input = input.substring(input.indexOf(':') + 2);
 
-        while(!input.equals("\"}")){
+        while(!input.equals("\"")){
             r.addStop(stringToLoc(input.substring(0, input.indexOf('+') + 1)));
             input = input.substring(input.indexOf('+') + 1);
         }
-
         return r;
     }
 
