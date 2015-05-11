@@ -116,7 +116,6 @@ public class LoginActivity extends Activity {
             }
         });
 
-        attemptLogin();
     }
 
 
@@ -190,8 +189,16 @@ public class LoginActivity extends Activity {
 
         //String url = getResources().getString(R.string.url_login);
 
+<<<<<<< HEAD
         //new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
         //new AsyncLogin().execute(url, "mobile@gmail.com", "123");
+=======
+        new AsyncLogin(this).execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
+        //new AsyncLogin().execute(url, "mobile@gmail.com", "123");
+
+        //finish();
+
+>>>>>>> 51ffb8d38f27269ba672ee1bfbf4b46fdb0d9f80
     }
 
     /**
@@ -240,8 +247,11 @@ public class LoginActivity extends Activity {
         //if(!mIsBackButtonPressed){
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             LoginActivity.this.startActivity(intent);
+
         //}
     }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

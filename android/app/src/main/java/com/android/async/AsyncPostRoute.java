@@ -29,6 +29,7 @@ public class AsyncPostRoute extends AsyncTask<String, Void, Void> {
     protected String authKey = null;
     protected String responseStr = null;
     protected int TIMEOUT_MILLISEC = 10000;
+    protected int responseCode = 0;
 
     @Override
     protected void onPreExecute()
@@ -43,15 +44,16 @@ public class AsyncPostRoute extends AsyncTask<String, Void, Void> {
             url = params[0];
             authKey = params[1];
 
-            jsonObj = new JSONObject(params[2]);
-                    /*
+            jsonObj = new JSONObject(
                 "{" +
-                        "\"username\":\"" + params[2] + "\"," +
-                        "\"day\":\"" + params[3] + "\"," +
-                        "\"route\":\"" + params[4] + "\"," +
-                        "\"stops\":\"" + params[5] + "\"" +
+                        "\"day\":\"" + params[2] + "\"," +
+                        "\"route\":\"" + params[3] + "\"," +
+                        "\"stops\":\"" + params[4] + "\"" +
                 "}"
-                */
+            );
+
+            Log.i("Stops: ",params[4]);
+
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -66,6 +68,7 @@ public class AsyncPostRoute extends AsyncTask<String, Void, Void> {
 
             HttpResponse response = client.execute(request);
             responseStr = EntityUtils.toString(response.getEntity());
+            responseCode = response.getStatusLine().getStatusCode();
         }
 
         catch (IOException e)
@@ -88,7 +91,23 @@ public class AsyncPostRoute extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
+        if(responseCode >=200 && responseCode < 300)
+        {
+            Toast.makeText(SplashScreen.cnt, "Route sent." , Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            String message;
+            try {
+                JSONObject reader = new JSONObject(responseStr);
+                message = reader.getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                message = "An error occurred!";
+            }
 
+            Toast.makeText(SplashScreen.cnt, message , Toast.LENGTH_LONG).show();
+        }
     }
 
 }

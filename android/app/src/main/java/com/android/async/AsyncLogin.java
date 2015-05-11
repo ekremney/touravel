@@ -1,5 +1,6 @@
 package com.android.async;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -32,6 +33,17 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
     protected String responseAuth = null;
     protected int TIMEOUT_MILLISEC = 10000;
     protected String tempUsr;
+    private Context context;
+
+
+
+
+
+
+    public AsyncLogin(Context context){
+
+        this.context=context;
+    }
 
     @Override
     protected void onPreExecute()
@@ -113,6 +125,10 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
             LoginActivity.showProgress(false);
             Toast.makeText(SplashScreen.cnt, "Error !" , Toast.LENGTH_LONG).show();
         }
+
+        ((LoginActivity)context).finish();
+
+
     }
 
     @Override

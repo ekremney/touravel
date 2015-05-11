@@ -1,10 +1,12 @@
 package com.android.async;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.interfaces.OnTaskCompleted;
+import com.example.touravel.app.BackgroundService;
 import com.example.touravel.app.LoginActivity;
 import com.example.touravel.app.SplashScreen;
 import com.example.touravel.app.StorylineActivity;
@@ -92,29 +94,47 @@ public class AsyncGetRoute extends AsyncTask<String, Void, Void> implements OnTa
             try {
                 JSONObject reader, fetched;
                 reader = new JSONObject(responseStr);
-                ArrayList<String> usernames = new ArrayList<String>();
                 ArrayList<String> routes = new ArrayList<String>();
-                ArrayList<String> locationss = new ArrayList<String>();
+                ArrayList<String> stops = new ArrayList<String>();
                 for (int i = 0; i < reader.length(); i++) {
                     fetched = reader.getJSONObject("" + i);
-                    usernames.add(fetched.getString("username"));
                     routes.add(fetched.getString("route"));
-                    locationss.add(fetched.getString("stops"));
+                    String loc = fetched.getString("stops");
+                    if(!loc.equals(""))
+                        stops.add(fetched.getString("stops"));
                 }
 
-                StorylineActivity.usernames = new String[usernames.size()];
-                for (int i = 0; i < usernames.size(); i++)
-                    StorylineActivity.usernames[i] = usernames.get(i);
+                int locNo = 0;
+                for (int k = 0; k < stops.size(); k++) {
+                    String locs = stops.get(k) + "!";
+                    while(!locs.equals("!")) {
+                        locNo++;
+                        locs = locs.substring(locs.indexOf('+') + 1);
+                    }
+                }
 
-                StorylineActivity.data = new String[routes.size() + locationss.size()];
+                int size = routes.size() + locNo;
+
+                StorylineActivity.usernames = new String[size];
+                for (int i = 0; i < size; i++)
+                    StorylineActivity.usernames[i] = BackgroundService.username;
+
+                StorylineActivity.data = new String[size];
+                StorylineActivity.types = new String[size];
                 int i;
                 for (i = 0; i < routes.size(); i++) {
-                    StorylineActivity.data[i] = routes.get(i);
-                    StorylineActivity.types[i] = "1";
+                    StorylineActivity.data[size - i - 1] = routes.get(i);
+                    StorylineActivity.types[size - i - 1] = "1";
                 }
-                for (; i < routes.size() + locationss.size(); i++) {
-                    StorylineActivity.data[i] = locationss.get(i - routes.size());
-                    StorylineActivity.types[i] = "0";
+
+                for (int k = 0; k < stops.size(); k++) {
+                    String locs = stops.get(k) + "!";
+                    while(!locs.equals("!")) {
+                        StorylineActivity.data[size - i - 1] = locs.substring(0, locs.indexOf('+') + 1);
+                        StorylineActivity.types[size - i - 1] = "0";
+                        i++;
+                        locs = locs.substring(locs.indexOf('+') + 1);
+                    }
                 }
 
                 listener.onTaskCompleted();

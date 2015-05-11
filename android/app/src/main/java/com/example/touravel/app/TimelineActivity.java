@@ -3,6 +3,7 @@ package com.example.touravel.app;
 /**
  * Created by gokhancs on 17/03/15.
  */
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -77,14 +78,14 @@ public class TimelineActivity extends ActionBarActivity implements OnTaskComplet
 
     }
 
-    public void like(int pos){
-        new AsyncLike().execute(getResources().getString(R.string.url_get_timeline) + "/like",
+    public static void like(int pos){
+        new AsyncLike().execute(SplashScreen.cnt.getResources().getString(R.string.url_get_timeline) + "/like",
                 SplashScreen.auth, ids[pos]);
         likes[pos] = (Integer.parseInt(likes[pos]) + 1) + "";
     }
 
-    public void unlike(int pos){
-        new AsyncUnlike().execute(getResources().getString(R.string.url_get_timeline) + "/unlike",
+    public static void unlike(int pos){
+        new AsyncUnlike().execute(SplashScreen.cnt.getResources().getString(R.string.url_get_timeline) + "/unlike",
                 SplashScreen.auth, ids[pos]);
         likes[pos] = (Integer.parseInt(likes[pos]) - 1) + "";
     }
