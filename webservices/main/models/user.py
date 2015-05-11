@@ -125,8 +125,10 @@ class User(db.Model):
 		user = User.query.filter_by(email=headers.get('email')).first()
 		if headers.get('password') is None:
 			raise ValidationError('Please fill password field.')
+		result = {}
 		if user is not None and user.verify_password(headers.get('password')):
-			return user.generate_auth_token()
+			result = {'auth-key': user.generate_auth_token(), 'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
+			return result
 		return None
 
 	def user_search(self, json_post):
@@ -223,13 +225,16 @@ class User(db.Model):
 		return return_val
 
 	def get_info(self, headers):
-		username = headers.get('username')
-		if username is None:
-			raise ValidationError('You should specify a username')
-		user = User.query.filter_by(username=username).first()
+		email = headers.get('email')
+		if email is None:
+			raise ValidationError('You should specify an email')
+		user = User.query.filter_by(email=email).first()
 		if user is None:
 			raise ValidationError('There\'s no such user')
-		info = {'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
+		following_count = len(self.followed.all())
+		follower_count = len(self.followers.all())
+		route_count = len(self.posts.all())
+		info = {'follower_count': follower_count, 'following_count': following_count, 'route_count': route_count, 'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
 		return info
 
 	def post_timeline(self, json_post):
@@ -281,6 +286,34 @@ class User(db.Model):
 		t_o.like_amount -= 1
 		db.session.commit()
 		return t_o.like_amount
+
+	def return_followed_users(self):
+		# Followerlari donuyor
+		t_o = self.followed.all()
+		user_list = []
+		# Followerlar id'lerini listeye aliyor
+		for i, val in enumerate(t_o):
+			user_list.append(getattr(val, 'followed_id'))
+		# Follower id'lerinden user'lari cekiyor
+		users = User.query.filter(User.id.in_(user_list)).all()
+		return_val = {}
+		for i, val in enumerate(users):
+			return_val[i] = {'username': getattr(val, 'username'), 'avatar': getattr(val, 'avatar'), 'location': getattr(val, 'location'), 'name': getattr(val, 'name'), 'avatar_thumb': getattr(val, 'avatar_thumb'), 'about_me': getattr(val, 'about_me') }
+		return return_val
+
+	def return_follower_users(self):
+		# Followerlari donuyor
+		t_o = self.followers.all()
+		user_list = []
+		# Followerlar id'lerini listeye aliyor
+		for i, val in enumerate(t_o):
+			user_list.append(getattr(val, 'follower_id'))
+		# Follower id'lerinden user'lari cekiyor
+		users = User.query.filter(User.id.in_(user_list)).all()
+		return_val = {}
+		for i, val in enumerate(users):
+			return_val[i] = {'username': getattr(val, 'username'), 'avatar': getattr(val, 'avatar'), 'location': getattr(val, 'location'), 'name': getattr(val, 'name'), 'avatar_thumb': getattr(val, 'avatar_thumb'), 'about_me': getattr(val, 'about_me') }
+		return return_val
 
 
 

@@ -21,7 +21,7 @@ def get_users(user):
 def login():
 	token = User.login(request.headers)
 	if token is not None:
-		return render_response(200, {'auth-key': token})
+		return render_response(200, token)
 	return render_response(401, {'message': 'Login unsuccessful.'})
 
 @api.route('/api/v1.0/user/change_email', methods=['POST'])
@@ -107,6 +107,18 @@ def like_timeline(user):
 def unlike_timeline(user):
 	like_amount = user.unlike_timeline(request.headers)
 	return render_response(200, {'like_amount': like_amount})
+
+@api.route('/api/v1.0/user/followed_users', methods=['GET'])
+@protected_realm
+def return_followed_users(user):
+	followed_users = user.return_followed_users()
+	return render_response(200, followed_users)
+
+@api.route('/api/v1.0/user/follower_users', methods=['GET'])
+@protected_realm
+def return_follower_users(user):
+	follower_users = user.return_follower_users()
+	return render_response(200, follower_users)
 
 
 
