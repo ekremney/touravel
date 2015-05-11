@@ -65,10 +65,6 @@ public class StorylineActivity extends ActionBarActivity implements OnTaskComple
 
     }
 
-    public void share(int pos){
-
-    }
-
     @Override
     public void onTaskCompleted(List<User> users) {
 

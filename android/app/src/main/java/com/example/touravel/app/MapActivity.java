@@ -144,8 +144,8 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
                 .fillColor(Route.DRAW_COLOR));
     }
 
-    public void putMarker(double  latitude, double longitude, String text){
-        theMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(text));
+    public static void putMarker(GoogleMap map, double  latitude, double longitude, String text){
+        map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(text));
     }
 
     public void moveCam(double  latitude, double longitude, double zoom){

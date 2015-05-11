@@ -115,7 +115,13 @@ public class Route {
         for(int i = 0; i < getLocationNo(); i++) {
             Circle c = map.addCircle(circles.get(i));
             dots.add(c);
+
+
+
+
         }
+
+
 
     }
 

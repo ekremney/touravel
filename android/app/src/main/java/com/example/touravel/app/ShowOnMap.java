@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
 
-public class ShowOnMap extends ActionBarActivity  implements OnMapReadyCallback {
+public class ShowOnMap extends ActionBarActivity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +62,16 @@ public class ShowOnMap extends ActionBarActivity  implements OnMapReadyCallback 
         else{
             loc = new LatLng(BackgroundService.tempLoc.latitude, BackgroundService.tempLoc.longitude);
             MapActivity.putDot(googleMap, loc.latitude, loc.longitude);
+            MapActivity.putMarker(googleMap,loc.latitude, loc.longitude, "");
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
                     .target(loc).zoom((float) 16.0).bearing(0).tilt(0).build()));
         }
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }
