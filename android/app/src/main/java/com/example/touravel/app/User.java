@@ -80,4 +80,20 @@ public class User {
     public int getRoute_count(){
         return route_count;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setAbout_me(String about_me) {
+        this.about_me = about_me;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }

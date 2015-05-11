@@ -83,6 +83,20 @@ public class SettingsActivity extends Activity {
         tvName = (EditText) findViewById(R.id.textName);
         tvLocation = (EditText) findViewById(R.id.textLocation);
         tvAboutMe = (EditText) findViewById(R.id.textAboutMe);
+
+        tvName.setText(SplashScreen.user.getName());
+        tvLocation.setText(SplashScreen.user.getLocation());
+        tvAboutMe.setText(SplashScreen.user.getLocation());
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        tvName.setText(SplashScreen.user.getName());
+        tvLocation.setText(SplashScreen.user.getLocation());
+        tvAboutMe.setText(SplashScreen.user.getAbout_me());
     }
 
     public static void clearEmailForm()

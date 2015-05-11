@@ -98,41 +98,18 @@ public class ProfileActivity extends ActionBarActivity implements ProfileInterfa
         textView7 = (TextView) findViewById(R.id.textView7);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
 
-        String url = getResources().getString(R.string.url_get_info);
-        new AsyncGetInfo(new ProfileInterface() {
-            @Override
-            public void onTaskCompleted(String response) {
-                try {
-                    JSONObject reader = new JSONObject(response);
-                    SplashScreen.user = new User(reader.getString("username"),
-                            reader.getString("name"),
-                            reader.getString("location"),
-                            reader.getString("about_me"),
-                            reader.getString("avatar_thumb"),
-                            reader.getString("avatar"),
-                            reader.getInt("follower_count"),
-                            reader.getInt("following_count"),
-                            reader.getInt("route_count"));
-                    Log.i("following: ", "" + reader.getInt("following_count"));
-                    btn_routes.setText("" + SplashScreen.user.getRoute_count());
-                    btn_followers.setText("" + SplashScreen.user.getFollowerCount());
-                    btn_following.setText("" + SplashScreen.user.getFollowingCount());
-                    textView2.setText("" + SplashScreen.user.getName());
-                    textView6.setText("" + SplashScreen.user.getLocation());
-                    textView7.setText("" + SplashScreen.user.getAbout_me());
+        btn_routes.setText("" + SplashScreen.user.getRoute_count());
+        btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+        btn_following.setText("" + SplashScreen.user.getFollowingCount());
+        textView2.setText("" + SplashScreen.user.getName());
+        textView6.setText("" + SplashScreen.user.getLocation());
+        textView7.setText("" + SplashScreen.user.getAbout_me());
 
-                    byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
-                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imageView2.setImageBitmap(decodedByte);
-                    imageView2.getLayoutParams().height = 500;
-                    imageView2.getLayoutParams().width = 500;
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).execute(url, SplashScreen.auth, SplashScreen.username_email);
+        byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imageView2.setImageBitmap(decodedByte);
+        imageView2.getLayoutParams().height = 500;
+        imageView2.getLayoutParams().width = 500;
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +168,24 @@ public class ProfileActivity extends ActionBarActivity implements ProfileInterfa
                 startListUserActivity("follower");
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        btn_routes.setText("" + SplashScreen.user.getRoute_count());
+        btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+        btn_following.setText("" + SplashScreen.user.getFollowingCount());
+        textView2.setText("" + SplashScreen.user.getName());
+        textView6.setText("" + SplashScreen.user.getLocation());
+        textView7.setText("" + SplashScreen.user.getAbout_me());
+
+        byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imageView2.setImageBitmap(decodedByte);
+        imageView2.getLayoutParams().height = 500;
+        imageView2.getLayoutParams().width = 500;
     }
 
     @Override

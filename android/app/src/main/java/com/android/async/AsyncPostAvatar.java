@@ -32,6 +32,7 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
     protected String responseStr = null;
     protected int TIMEOUT_MILLISEC = 10000;
     protected int responseCode = 0;
+    protected String avatarData = null;
 
     @Override
     protected void onPreExecute()
@@ -45,15 +46,13 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
         {
             url = params[0];
             authKey = params[1];
-
+            avatarData = params[2];
             jsonObj = new JSONObject
             (
                 "{" +
                         "\"data\":\"" + params[2] + "\"" +
                 "}"
             );
-
-            System.out.println(""+params[2]);
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -95,8 +94,24 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
     protected void onPostExecute(Void param)
     {
 
-        Log.e("postExecute", ""+responseCode);
-        Log.e("hebele", responseStr);
+        if(responseCode >=200 && responseCode < 300)
+        {
+            Toast.makeText(SplashScreen.cnt, "Avatar uploaded succesfully", Toast.LENGTH_LONG).show();
+            SplashScreen.user.setAvatar(avatarData);
+        }
+        else
+        {
+            String message;
+            try {
+                JSONObject reader = new JSONObject(responseStr);
+                message = reader.getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                message = "An error occurred :(";
+            }
+
+            Toast.makeText(SplashScreen.cnt, message , Toast.LENGTH_LONG).show();
+        }
     }
 
 }

@@ -30,6 +30,9 @@ public class AsyncEditProfile extends AsyncTask<String, Void, Void> {
     protected String responseStr = null;
     protected int responseCode = 0;
     protected int TIMEOUT_MILLISEC = 10000;
+    protected String name = null;
+    protected String location = null;
+    protected String about_me = null;
 
     @Override
     protected void onPreExecute()
@@ -43,6 +46,9 @@ public class AsyncEditProfile extends AsyncTask<String, Void, Void> {
         {
             url = params[0];
             authKey = params[1];
+            name = params[2];
+            location = params[3];
+            about_me = params[4];
 
             jsonObj = new JSONObject
             (
@@ -92,7 +98,10 @@ public class AsyncEditProfile extends AsyncTask<String, Void, Void> {
         if(responseCode >=200 && responseCode < 300)
         {
             Toast.makeText(SplashScreen.cnt, "Profile information has been changed" , Toast.LENGTH_LONG).show();
-            SettingsActivity.clearEditProfileForm();
+            SplashScreen.user.setName(name);
+            SplashScreen.user.setLocation(location);
+            SplashScreen.user.setAbout_me(about_me);
+
         }
         else
         {

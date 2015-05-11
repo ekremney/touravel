@@ -125,9 +125,12 @@ class User(db.Model):
 		user = User.query.filter_by(email=headers.get('email')).first()
 		if headers.get('password') is None:
 			raise ValidationError('Please fill password field.')
+		following_count = len(user.followed.all())
+		follower_count = len(user.followers.all())
+		route_count = len(user.posts.all())
 		result = {}
 		if user is not None and user.verify_password(headers.get('password')):
-			result = {'auth-key': user.generate_auth_token(), 'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
+			result = {'follower_count': follower_count, 'following_count': following_count, 'route_count': route_count, 'auth-key': user.generate_auth_token(), 'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
 			return result
 		return None
 
@@ -194,8 +197,11 @@ class User(db.Model):
 	def upload_avatar(self, json_post):
 		if json_post.get('data') is None:
 			raise ValidationError('JSON should have all fields')
-		self.avatar = json_post.get('avatar')
+		if (json_post.get('data') is False):
+			raise ValidationError('data has no value')
+		self.avatar = json_post.get('data')
 		db.session.add(self)
+		return True
 
 	def fetch_avatar(self, headers):
 		username = headers.get('username')

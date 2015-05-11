@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 import com.example.touravel.app.LoginActivity;
 import com.example.touravel.app.MainActivity;
-import com.example.touravel.app.ProfileActivity;
-import com.example.touravel.app.RegisterActivity;
 import com.example.touravel.app.SplashScreen;
 import com.example.touravel.app.User;
 
@@ -24,8 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class AsyncLogin extends AsyncTask<String, Void, Void> {
@@ -75,7 +71,6 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-
         return null;
     }
 
@@ -87,31 +82,21 @@ public class AsyncLogin extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
-        //Toast.makeText(SplashScreen.cnt, ""+responseCode, Toast.LENGTH_LONG).show();
-        Log.i("POST-Response", ""+responseCode);
-
-
-
-        boolean state = (( responseCode >= 200 ) && ( responseCode < 300));
-
-
-        Log.i("state", ""+state);
-        if(state)
+        Log.e("asd", "dsa");
+        if(( responseCode >= 200 ) && ( responseCode < 300))
         {
             String auth = "";
             JSONObject reader;
             try {
                 reader = new JSONObject(responseStr);
                 auth = reader.getString("auth-key");
-
+                SplashScreen.user = new User(reader.getString("username"), reader.getString("name"), reader.getString("location"), reader.getString("about_me"), reader.getString("avatar_thumb"), reader.getString("avatar"), Integer.parseInt(reader.getString("follower_count")), Integer.parseInt(reader.getString("following_count")), Integer.parseInt(reader.getString("route_count")));
             } catch (JSONException e) {
                 e.printStackTrace();
                 Toast.makeText(SplashScreen.cnt, "A wild error occurred!" , Toast.LENGTH_LONG).show();
             }
 
             SplashScreen.setAuth(auth);
-
-            Log.i("setUsernameEmail", ""+tempUsr);
 
             SplashScreen.setUsernameEmail(tempUsr);
 
