@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.touravel.app.SelectedRoute">
+
+    <TextView
+        android:id="@+id/selected_route_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button android:id="@+id/share_route_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share Route"
+        android:layout_gravity="left" />
+
+    <Button android:id="@+id/delete_route_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Route"
+        android:layout_gravity="right" />
+
+</LinearLayout>

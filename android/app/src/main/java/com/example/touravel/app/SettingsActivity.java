@@ -8,7 +8,12 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,7 +29,11 @@ import android.widget.ToggleButton;
 import com.android.async.AsyncChangeEmail;
 import com.android.async.AsyncChangePassword;
 import com.android.async.AsyncEditProfile;
+import com.android.async.AsyncPostAvatar;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class SettingsActivity extends Activity {
@@ -35,6 +44,8 @@ public class SettingsActivity extends Activity {
     protected static EditText tvName, tvLocation, tvAboutMe;
     protected static Switch switchService;
     protected Context cnt;
+    protected static String selectedIMG;
+    private static final int SELECT_PHOTO = 100;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,12 +138,63 @@ public class SettingsActivity extends Activity {
                 new AsyncEditProfile().execute(url, SplashScreen.auth, name, location, aboutMe);
                 break;
             }
+            case R.id.uploadAvatar:
+            {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+            }
             default:
                 break;
 
 
         }
     }
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        switch(requestCode) {
+            case SELECT_PHOTO:
+
+                String url = getResources().getString(R.string.url_post_avatar);
+
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = imageReturnedIntent.getData();
+                    InputStream imageStream = null;
+                    Bitmap yourSelectedImage = null;
+                    try
+                    {
+                        imageStream = getContentResolver().openInputStream(selectedImage);
+                        yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+
+
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        yourSelectedImage.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+                        selectedIMG = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                        new AsyncPostAvatar().execute(url, SplashScreen.auth, selectedIMG);
+
+                    }
+                    catch (IOException e)
+                    {
+                        Log.e("capture img", ""+e);
+                    }
+
+
+                }
+            default:
+                break;
+        }
+    }
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.
