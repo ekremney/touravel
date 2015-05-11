@@ -63,7 +63,7 @@ def edit_profile(user):
 @api.route('/api/v1.0/user/avatar', methods=['POST'])
 @protected_realm
 def upload_avatar(user):
-	user.change_avatar(request.json)
+	user.upload_avatar(request.json)
 	return render_response(201, {'message': 'Avatar uploaded successfully'})
 
 @api.route('/api/v1.0/user/avatar', methods=['GET'])

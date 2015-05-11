@@ -192,7 +192,7 @@ class User(db.Model):
 		return True
 
 	def upload_avatar(self, json_post):
-		if json_post.get('avatar') is None:
+		if json_post.get('data') is None:
 			raise ValidationError('JSON should have all fields')
 		self.avatar = json_post.get('avatar')
 		db.session.add(self)
