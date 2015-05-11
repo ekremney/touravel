@@ -180,25 +180,10 @@ public class LoginActivity extends Activity {
             mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
             showProgress(true);
 
-            String url = getResources().getString(R.string.url_login);
-
-            new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
-            //new AsyncLogin().execute(url, "mobile@gmail.com", "123");
-
         }
 
-        //String url = getResources().getString(R.string.url_login);
-
-<<<<<<< HEAD
-        //new AsyncLogin().execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
-        //new AsyncLogin().execute(url, "mobile@gmail.com", "123");
-=======
+        String url = getResources().getString(R.string.url_login);
         new AsyncLogin(this).execute(url, ""+mEmailView.getText(), ""+mPasswordView.getText());
-        //new AsyncLogin().execute(url, "mobile@gmail.com", "123");
-
-        //finish();
-
->>>>>>> 51ffb8d38f27269ba672ee1bfbf4b46fdb0d9f80
     }
 
     /**
