@@ -83,10 +83,6 @@
             android:name=".ShowOnMap"
             android:label="@string/title_activity_show_on_map" >
         </activity>
-        <activity
-            android:name=".MiniMap"
-            android:label="@string/title_activity_mini_map" >
-        </activity>
     </application>
 
 </manifest>
