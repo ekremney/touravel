@@ -44,7 +44,7 @@ public class SettingsActivity extends Activity {
     protected static EditText tvName, tvLocation, tvAboutMe;
     protected static Switch switchService;
     protected Context cnt;
-    protected static String selectedIMG;
+    protected static String selectedIMG, selectedIMG_thumb;
     private static final int SELECT_PHOTO = 100;
 
     @Override
@@ -123,6 +123,17 @@ public class SettingsActivity extends Activity {
 
         switch(v.getId())
         {
+            case R.id.logoutButton:
+                SplashScreen.auth = null;
+                Intent logout_intent = new Intent(this, LoginActivity.class);
+                startActivity(logout_intent);
+                finish();
+                break;
+
+            case R.id.searchButton:
+                Intent intent = new Intent(this, ListUsersActivity.class);
+                startActivity(intent);
+                break;
             case R.id.btnChangeEmail:
             {
                 String url = getResources().getString(R.string.url_change_email);
@@ -180,20 +191,36 @@ public class SettingsActivity extends Activity {
                 if(resultCode == RESULT_OK){
                     Uri selectedImage = imageReturnedIntent.getData();
                     InputStream imageStream = null;
-                    Bitmap yourSelectedImage = null;
+                    Bitmap yourSelectedImage = null, resized = null, selectedIMG_thumb_data = null;
                     try
                     {
                         imageStream = getContentResolver().openInputStream(selectedImage);
                         yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 
+                        double ratio = (double)320/(double)yourSelectedImage.getWidth();
+                        double ratio_thumb = (double)240/(double)yourSelectedImage.getWidth();
+                        Log.e("ratio", "" + ratio);
+                        if (ratio < 1) {
+                            Log.e("whaddup", "biatcheez");
+                            resized = Bitmap.createScaledBitmap(yourSelectedImage, (int) (yourSelectedImage.getWidth() * ratio), (int) (yourSelectedImage.getHeight() * ratio), true);
+                        }
+                        else {
+                            resized = yourSelectedImage;
+                        }
+                        selectedIMG_thumb_data = Bitmap.createScaledBitmap(yourSelectedImage, (int) (yourSelectedImage.getWidth() * ratio_thumb), (int) (yourSelectedImage.getHeight() * ratio_thumb), true);
 
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        yourSelectedImage.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                        byte[] byteArray = byteArrayOutputStream .toByteArray();
+                        resized.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+                        ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
+                        selectedIMG_thumb_data.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream2);
+                        byte[] byteArray2 = byteArrayOutputStream.toByteArray();
 
                         selectedIMG = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        selectedIMG_thumb = Base64.encodeToString(byteArray2, Base64.DEFAULT);
 
-                        new AsyncPostAvatar().execute(url, SplashScreen.auth, selectedIMG);
+                        new AsyncPostAvatar().execute(url, SplashScreen.auth, selectedIMG, selectedIMG_thumb);
 
                     }
                     catch (IOException e)

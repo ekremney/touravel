@@ -100,12 +100,6 @@ public class AsyncSearchByUsername extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
-        /*
-        Toast.makeText(SplashScreen.cnt, jsonObj.toString(), Toast.LENGTH_LONG).show();
-        Log.i("POST", authKey + " | " + jsonObj.toString());
-        Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
-        Log.i("POST-Response", responseStr);
-        */
 
         if(responseCode >=200 && responseCode < 300)
         {
@@ -113,10 +107,9 @@ public class AsyncSearchByUsername extends AsyncTask<String, Void, Void> {
             List<User> users = new ArrayList<User>();
             try {
                 reader = new JSONObject(responseStr);
-                Toast.makeText(SplashScreen.cnt, responseStr , Toast.LENGTH_LONG).show();
                 for (int i = 0; i < reader.length(); i ++) {
                     data = reader.getJSONObject("" + i);
-                    users.add(new User("@" + data.getString("username"), data.getString("name"), data.getString("location"), data.getString("about_me"), data.getString("avatar_thumb")));
+                    users.add(new User(data.getString("username"), data.getString("name"), data.getString("location"), data.getString("about_me"), data.getString("avatar_thumb"), data.getString("avatar"), Integer.parseInt(data.getString("follower_count")), Integer.parseInt(data.getString("following_count")), Integer.parseInt(data.getString("route_count"))));
                 }
 
             } catch (JSONException e) {

@@ -66,8 +66,10 @@ public class MainActivity extends TabActivity {
                 startActivity(intent);
                 break;
             case R.id.action_logout:
+                SplashScreen.auth = null;
                 Intent logout_intent = new Intent(this, LoginActivity.class);
                 startActivity(logout_intent);
+                finish();
                 break;
             default:
                 break;

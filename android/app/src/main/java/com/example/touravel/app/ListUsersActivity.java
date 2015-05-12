@@ -39,22 +39,7 @@ public class ListUsersActivity extends ActionBarActivity implements OnTaskComple
         tvUsernameSearch = (EditText) findViewById(R.id.usernameSearch);
         userlist = (ListView) findViewById(R.id.userlist);
 
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
 
     public void btnOnClick(View v) {
         switch(v.getId()) {

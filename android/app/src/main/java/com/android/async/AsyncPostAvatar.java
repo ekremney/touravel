@@ -32,7 +32,7 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
     protected String responseStr = null;
     protected int TIMEOUT_MILLISEC = 10000;
     protected int responseCode = 0;
-    protected String avatarData = null;
+    protected String avatarData = null, avatar_thumbData = null;
 
     @Override
     protected void onPreExecute()
@@ -47,10 +47,12 @@ public class AsyncPostAvatar extends AsyncTask<String, Void, Void> {
             url = params[0];
             authKey = params[1];
             avatarData = params[2];
+            avatar_thumbData = params[3];
             jsonObj = new JSONObject
             (
                 "{" +
-                        "\"data\":\"" + params[2] + "\"" +
+                        "\"data\":\"" + params[2] + "\"," +
+                        "\"data_thumb\":\"" + params[3] + "\"" +
                 "}"
             );
 

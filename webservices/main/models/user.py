@@ -128,6 +128,7 @@ class User(db.Model):
 		following_count = len(user.followed.all())
 		follower_count = len(user.followers.all())
 		route_count = len(user.posts.all())
+
 		result = {}
 		if user is not None and user.verify_password(headers.get('password')):
 			result = {'follower_count': follower_count, 'following_count': following_count, 'route_count': route_count, 'auth-key': user.generate_auth_token(), 'username': user.username, 'name': user.name, 'location': user.location, 'about_me': user.about_me, 'avatar': user.avatar, 'avatar_thumb': user.avatar_thumb}
@@ -143,7 +144,10 @@ class User(db.Model):
 		result = User.query.filter(User.username.ilike('%' + username + '%')).all()
 		return_val = {}
 		for i, val in enumerate(result):
-			return_val[i] = {'username': getattr(val, 'username'), 'name': getattr(val, 'name'), 'location': getattr(val, 'location'), 'about_me': getattr(val, 'about_me'), 'avatar_thumb': getattr(val, 'avatar_thumb')}
+			following_count = len(getattr(val, 'followed').all())
+			follower_count = len(getattr(val, 'followers').all())
+			route_count = len(getattr(val, 'posts').all())
+			return_val[i] = {'follower_count': follower_count, 'following_count': following_count, 'route_count': route_count, 'avatar': getattr(val, 'avatar'), 'username': getattr(val, 'username'), 'name': getattr(val, 'name'), 'location': getattr(val, 'location'), 'about_me': getattr(val, 'about_me'), 'avatar_thumb': getattr(val, 'avatar_thumb')}
 		return return_val
 
 	def follow(self, headers):
@@ -200,6 +204,7 @@ class User(db.Model):
 		if (json_post.get('data') is False):
 			raise ValidationError('data has no value')
 		self.avatar = json_post.get('data')
+		self.avatar_thumb = json_post.get('data_thumb')
 		db.session.add(self)
 		return True
 

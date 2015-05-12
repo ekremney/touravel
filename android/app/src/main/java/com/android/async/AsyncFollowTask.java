@@ -79,14 +79,12 @@ public class AsyncFollowTask extends AsyncTask<String, Void, Void> {
         Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
         Log.i("POST-Response", responseStr);
         */
-        Toast.makeText(SplashScreen.cnt, "r.code: "+responseCode, Toast.LENGTH_LONG).show();
 
         if (responseCode >= 200 && responseCode < 300) {
             JSONObject reader, data;
             List<User> users = new ArrayList<User>();
             try {
                 reader = new JSONObject(responseStr);
-                Toast.makeText(SplashScreen.cnt, responseStr, Toast.LENGTH_LONG).show();
                 for (int i = 0; i < reader.length(); i++) {
                     data = reader.getJSONObject("" + i);
                     users.add(new User("@" + data.getString("username"), data.getString("name"), data.getString("location"), data.getString("about_me"), data.getString("avatar_thumb")));

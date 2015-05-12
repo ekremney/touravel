@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.interfaces.FollowInterface;
 import com.example.touravel.app.LoginActivity;
 import com.example.touravel.app.MainActivity;
 import com.example.touravel.app.SplashScreen;
@@ -17,6 +18,8 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -25,7 +28,14 @@ public class AsyncFollow extends AsyncTask<String, Void, Void> {
 
     protected String url = null;
     protected String responseStr = null;
+    protected String username = null;
+    protected int responseCode = 0;
     protected int TIMEOUT_MILLISEC = 10000;
+    private FollowInterface listener;
+
+    public AsyncFollow(FollowInterface listener){
+        this.listener=listener;
+    }
 
     @Override
     protected void onPreExecute()
@@ -38,6 +48,7 @@ public class AsyncFollow extends AsyncTask<String, Void, Void> {
         try
         {
             url = params[0];
+            username = params[2];
 
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
@@ -52,6 +63,7 @@ public class AsyncFollow extends AsyncTask<String, Void, Void> {
 
             HttpResponse response = client.execute(request);
             responseStr = EntityUtils.toString(response.getEntity());
+            responseCode = response.getStatusLine().getStatusCode();
 
             Log.i("GET", "auth-key -> " + params[1]);
             Log.i("GET", "username -> " + params[2]);
@@ -75,6 +87,23 @@ public class AsyncFollow extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void param)
     {
+
+        if (responseCode >= 200 && responseCode < 300) {
+            Toast.makeText(SplashScreen.cnt, "You followed " + username , Toast.LENGTH_LONG).show();
+        }
+        else {
+            String message;
+            try {
+                JSONObject reader = new JSONObject(responseStr);
+                message = reader.getString("message");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                message = "An error occurred!";
+            }
+
+            Toast.makeText(SplashScreen.cnt, message , Toast.LENGTH_LONG).show();
+            listener.onFollowCompleted();
+        }
 
 
     }

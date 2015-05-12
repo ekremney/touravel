@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8d61ffb2">
+    android:background="#8d61ffb2" >
 
     <ImageView
         android:id="@+id/user_avatar"
@@ -43,13 +43,14 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/user_profile"
+            android:id="@+id/selected_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#eb1100a3"
             android:textColor="#ffffffff"
             android:text=">"
-            android:layout_gravity="right" />
+            android:layout_gravity="right"
+            android:onClick="listItemClicked" />
 
     </LinearLayout>
 

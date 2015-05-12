@@ -178,12 +178,12 @@ public class BackgroundService extends Service implements
 
     @Override
     public void onConnectionSuspended(int i) {
-        print("Disconnected. Please re-connect.");
+
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult arg0) {
-        print("Failed. Please re-connect.");
+
     }
 
 

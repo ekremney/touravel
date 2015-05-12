@@ -31,6 +31,36 @@
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:id="@+id/logoutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:onClick="btnOnClick"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:onClick="btnOnClick"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
                     android:id="@+id/uploadAvatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

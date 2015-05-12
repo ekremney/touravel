@@ -96,4 +96,8 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public void setFollowing_count (int following_count) {
+        this.following_count = following_count;
+    }
 }

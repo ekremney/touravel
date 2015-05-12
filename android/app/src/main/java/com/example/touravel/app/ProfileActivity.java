@@ -22,8 +22,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.async.AsyncFollow;
 import com.android.async.AsyncGetInfo;
 import com.android.async.AsyncLogin;
+import com.android.interfaces.FollowInterface;
 import com.android.interfaces.ProfileInterface;
 
 import org.json.JSONException;
@@ -33,13 +35,14 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 
 
-public class ProfileActivity extends ActionBarActivity implements ProfileInterface {
+public class ProfileActivity extends ActionBarActivity implements ProfileInterface, FollowInterface {
 
     private TextView crew, following, followers;
     private ImageView settings, imageView2;
     private ImageButton btn_settings;
     private Button btn_routes, btn_following, btn_followers;
-    private TextView text_routes, text_following, text_followers, textView2, textView6, textView7;
+    private TextView text_routes, text_following, text_followers, textView2, textView6, textView7, textView;
+    private Bundle b;
 
 
     public void startListUserActivity(String state) {
@@ -97,95 +100,188 @@ public class ProfileActivity extends ActionBarActivity implements ProfileInterfa
         textView6 = (TextView) findViewById(R.id.textView6);
         textView7 = (TextView) findViewById(R.id.textView7);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
+        textView = (TextView) findViewById(R.id.textView);
 
-        btn_routes.setText("" + SplashScreen.user.getRoute_count());
-        btn_followers.setText("" + SplashScreen.user.getFollowerCount());
-        btn_following.setText("" + SplashScreen.user.getFollowingCount());
-        textView2.setText("" + SplashScreen.user.getName());
-        textView6.setText("" + SplashScreen.user.getLocation());
-        textView7.setText("" + SplashScreen.user.getAbout_me());
+        b = getIntent().getBundleExtra("user_bundle");
 
-        byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        imageView2.setImageBitmap(decodedByte);
-        imageView2.getLayoutParams().height = 500;
-        imageView2.getLayoutParams().width = 500;
+        if (b != null) {
+            //btn_routes.setText("" + b.getString("state"));
+            //btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+            //btn_following.setText("" + SplashScreen.user.getFollowingCount());
+            textView.setText("FOLLOW");
+            textView2.setText(""+b.getString("name"));
+            textView6.setText(""+b.getString("location"));
+            textView7.setText(""+b.getString("about_me"));
+            btn_routes.setText("" + b.getString("route_count"));
+            btn_followers.setText("" + b.getString("follower_count"));
+            btn_following.setText("" + b.getString("following_count"));
 
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
+            byte[] decodedString = Base64.decode(b.getString("avatar_thumb"), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView2.setImageBitmap(decodedByte);
+            imageView2.getLayoutParams().height = 500;
+            imageView2.getLayoutParams().width = 500;
 
-        btn_routes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, StorylineActivity.class);
-                startActivity(intent);
-            }
-        });
+        }
+        else {
 
-        text_routes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, StorylineActivity.class);
-                startActivity(intent);
-            }
-        });
+            btn_routes.setText("" + SplashScreen.user.getRoute_count());
+            btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+            btn_following.setText("" + SplashScreen.user.getFollowingCount());
+            textView2.setText("" + SplashScreen.user.getName());
+            textView6.setText("" + SplashScreen.user.getLocation());
+            textView7.setText("" + SplashScreen.user.getAbout_me());
+
+            byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView2.setImageBitmap(decodedByte);
+            imageView2.getLayoutParams().height = 500;
+            imageView2.getLayoutParams().width = 500;
+
+            settings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            btn_routes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProfileActivity.this, StorylineActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            text_routes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProfileActivity.this, StorylineActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
-        btn_following.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            btn_following.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 
-                startListUserActivity("following");
+                    startListUserActivity("following");
 
-            }
-        });
+                }
+            });
 
-        text_following.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            text_following.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                startListUserActivity("following");
+                    startListUserActivity("following");
 
-            }
-        });
+                }
+            });
 
-        btn_followers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startListUserActivity("follower");
-            }
-        });
+            btn_followers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startListUserActivity("follower");
+                }
+            });
 
-        text_followers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startListUserActivity("follower");
-            }
-        });
+            text_followers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startListUserActivity("follower");
+                }
+            });
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    textView.setText("UNFOLLOW");
+                    btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+                    btn_followers.setText(""+(Integer.parseInt((String)btn_followers.getText())+1));
+                }
+            });
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        String username1 = null;
 
-        btn_routes.setText("" + SplashScreen.user.getRoute_count());
-        btn_followers.setText("" + SplashScreen.user.getFollowerCount());
-        btn_following.setText("" + SplashScreen.user.getFollowingCount());
-        textView2.setText("" + SplashScreen.user.getName());
-        textView6.setText("" + SplashScreen.user.getLocation());
-        textView7.setText("" + SplashScreen.user.getAbout_me());
+        b = getIntent().getBundleExtra("user_bundle");
 
-        byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        imageView2.setImageBitmap(decodedByte);
-        imageView2.getLayoutParams().height = 500;
-        imageView2.getLayoutParams().width = 500;
+        if (b != null) {
+            //btn_routes.setText("" + b.getString("state"));
+            //btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+            //btn_following.setText("" + SplashScreen.user.getFollowingCount());
+            Log.e("name", b.getString("name"));
+            Log.e("location", b.getString("location"));
+            Log.e("about_me", b.getString("about_me"));
+            textView2.setText(""+b.getString("name"));
+            textView6.setText(""+b.getString("location"));
+            textView7.setText(""+b.getString("about_me"));
+            btn_routes.setText("" + b.getString("route_count"));
+            btn_followers.setText("" + b.getString("follower_count"));
+            btn_following.setText("" + b.getString("following_count"));
+
+            byte[] decodedString = Base64.decode(b.getString("avatar_thumb"), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView2.setImageBitmap(decodedByte);
+            imageView2.getLayoutParams().height = 500;
+            imageView2.getLayoutParams().width = 500;
+
+            username1 = ""+b.getString("username");
+
+        }
+        else {
+
+            username1 = SplashScreen.user.getUsername();
+
+            btn_routes.setText("" + SplashScreen.user.getRoute_count());
+            btn_followers.setText("" + SplashScreen.user.getFollowerCount());
+            btn_following.setText("" + SplashScreen.user.getFollowingCount());
+            textView2.setText("" + SplashScreen.user.getName());
+            textView6.setText("" + SplashScreen.user.getLocation());
+            textView7.setText("" + SplashScreen.user.getAbout_me());
+
+            byte[] decodedString = Base64.decode(SplashScreen.user.getAvatar(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageView2.setImageBitmap(decodedByte);
+            imageView2.getLayoutParams().height = 500;
+            imageView2.getLayoutParams().width = 500;
+        }
+        final String username2 = username1;
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (textView.getText().equals("FOLLOW")) {
+                    textView.setText("UNFOLLOW");
+                    btn_followers.setText("" + (Integer.parseInt((String) btn_followers.getText()) + 1));
+                    String url = getResources().getString(R.string.url_follow);
+                    changeBundle(1);
+                    SplashScreen.user.setFollowing_count(SplashScreen.user.getFollowingCount()+1);
+                    new AsyncFollow(new FollowInterface() {
+                        @Override
+                        public void onFollowCompleted() {
+                            textView.setText("FOLLOW");
+                            btn_followers.setText("" + (Integer.parseInt((String) btn_followers.getText()) - 1));
+                            textView.setText("UNFOLLOW");
+                            changeBundle(-1);
+                        }
+                    }).execute(url, SplashScreen.auth, ""+ username2);
+                }
+                else if (textView.getText().equals("UNFOLLOW")) {
+                    textView.setText("FOLLOW");
+                    btn_followers.setText("" + (Integer.parseInt((String) btn_followers.getText()) - 1));
+                    changeBundle(-1);
+
+                }
+            }
+        });
     }
 
     @Override
@@ -198,5 +294,14 @@ public class ProfileActivity extends ActionBarActivity implements ProfileInterfa
     @Override
     public void onTaskCompleted(String response) {
 
+    }
+
+    @Override
+    public void onFollowCompleted() {
+
+    }
+
+    public void changeBundle(int value) {
+        b.putString("follower_count", ""+value);
     }
 }
