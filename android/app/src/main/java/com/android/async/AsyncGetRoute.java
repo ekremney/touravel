@@ -100,6 +100,7 @@ public class AsyncGetRoute extends AsyncTask<String, Void, Void> implements OnTa
                     fetched = reader.getJSONObject("" + i);
                     routes.add(fetched.getString("route"));
                     String loc = fetched.getString("stops");
+                    //Toast.makeText(SplashScreen.cnt, loc, Toast.LENGTH_LONG).show();
                     if(!loc.equals(""))
                         stops.add(fetched.getString("stops"));
                 }

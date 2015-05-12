@@ -48,6 +48,7 @@ public class BackgroundService extends Service implements
 
     public static Route tempRoute;
     public static LatLng tempLoc;
+    public static String tempText;
     public static boolean tempType;
 
     public static final String BROADCAST_ACTION = "com.example.touravel.app.broadcast";
@@ -94,25 +95,6 @@ public class BackgroundService extends Service implements
         if(location.getAccuracy() < MAX_ACCURACY && (lastLocation == null ||
                 (lastLocation != null && lastLocation.distanceTo(location) > MIN_DISTANCE_BTW_LOCS
                         && lastLocation != null && lastLocation.distanceTo(location) < MAX_DISTANCE_BTW_LOCS))) {
-
-            boolean stopStart = false, stopStop = true;
-            int i, j;
-            for(i = curRoute.getLocationNo() - 1; i > curRoute.lastCheckin; i--)
-                if(location.getTime() - curRoute.getLocation(i).getTime() > STOP_TIME){
-                    stopStart = true;
-                    break;
-                }
-            if(stopStart)
-                for(j = i; j < curRoute.getLocationNo(); j++)
-                    if(curRoute.getLocation(j).distanceTo(location) > STOP_DISTANCE){
-                        stopStart = false;
-                        break;
-                    }
-            if(stopStart && stopStop && curRoute.lastCheckin < i + 1) {
-                curRoute.addStop(curRoute.getLocation(i + 1));
-                curRoute.lastCheckin = curRoute.getLocationNo();
-            }
-
 
             lastLocation = location;
             if(curRoute == null)

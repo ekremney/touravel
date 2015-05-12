@@ -62,7 +62,7 @@ public class ShowOnMap extends ActionBarActivity implements OnMapReadyCallback {
         else{
             loc = new LatLng(BackgroundService.tempLoc.latitude, BackgroundService.tempLoc.longitude);
             MapActivity.putDot(googleMap, loc.latitude, loc.longitude);
-            MapActivity.putMarker(googleMap,loc.latitude, loc.longitude, "");
+            MapActivity.putMarker(googleMap,loc.latitude, loc.longitude, BackgroundService.tempText);
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
                     .target(loc).zoom((float) 16.0).bearing(0).tilt(0).build()));
         }
