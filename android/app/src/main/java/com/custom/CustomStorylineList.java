@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.async.AsyncPostTimeline;
 import com.example.touravel.app.BackgroundService;
@@ -100,12 +102,21 @@ public class CustomStorylineList extends ArrayAdapter<String>
         rowView.findViewById(R.id.middle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                BackgroundService.tempType = StorylineActivity.types[pos].equals("1");
                 if (BackgroundService.tempType)
                     BackgroundService.tempRoute = Route.fromString("\"route\":\"" +
                             StorylineActivity.data[pos] + "\",\"stops\":\"\"");
-                else
-                    BackgroundService.tempLoc = new LatLng(Route.stringToLoc(StorylineActivity.data[pos]).getLatitude(),
-                            Route.stringToLoc(StorylineActivity.data[pos]).getLongitude());
+                else {
+                    String input = StorylineActivity.data[pos];
+                    double lat = Double.parseDouble(input.substring(0, input.indexOf(',')));
+                    input = input.substring(input.indexOf(',') + 1);
+                    double lon = Double.parseDouble(input.substring(0, input.indexOf(',')));
+                    input = input.substring(input.indexOf(',') + 1);
+                    String txt = input.substring(0, input.indexOf('+'));
+                    input = input.substring(input.indexOf('+') + 1);
+                    BackgroundService.tempLoc = new LatLng(lat, lon);
+                    BackgroundService.tempText = txt;
+                }
 
                 context.startActivity(new Intent(context, ShowOnMap.class));
             }

@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -25,18 +26,22 @@ import java.util.ArrayList;
 public class Route {
 
     private ArrayList<Location> locations = null;
-    private ArrayList<Location> stops = null;
+    private ArrayList<LatLng> stops = null;
+    private ArrayList<Marker> markers = null;
+    private ArrayList<String> texts = null;
     private ArrayList<Circle> dots = null;
     private ArrayList<CircleOptions> circles = null;
     private Polyline line = null;
     private PolylineOptions lineOptions = null;
-    public static final int CIRCLE_RADIUS = 3;
+    public static final int CIRCLE_RADIUS = 6;
     public static final int DRAW_COLOR = Color.parseColor("#088A08");
     public int lastCheckin;
 
     public Route (){
         locations = new ArrayList<Location>();
-        stops = new ArrayList<Location>();
+        stops = new ArrayList<LatLng>();
+        markers = new ArrayList<Marker>();
+        texts = new ArrayList<String>();
         dots = new ArrayList<Circle>();
         circles = new ArrayList<CircleOptions>();
         lineOptions = new PolylineOptions();
@@ -45,9 +50,10 @@ public class Route {
 
     public Route(Route r){
         locations = new ArrayList<Location>();
-        stops = new ArrayList<Location>();
+        stops = new ArrayList<LatLng>();
         circles = new ArrayList<CircleOptions>();
         dots = new ArrayList<Circle>();
+        texts = new ArrayList<String>();
         lastCheckin = r.lastCheckin;
 
         for(int i = 0; i < r.getLocationNo(); i++)
@@ -55,6 +61,9 @@ public class Route {
 
         for(int i = 0; i < r.getStopList().size(); i++)
             stops.add(r.getStopList().get(i));
+
+        for(int i = 0; i < r.getTexts().size(); i++)
+            texts.add(r.getTexts().get(i));
 
         for(int i = 0; i < r.getCircles().size(); i++)
             circles.add((r.getCircles()).get(i));
@@ -66,7 +75,7 @@ public class Route {
         line = r.getLine();
     }
 
-    public boolean check(Route r){
+    public boolean chdddddddddeck(Route r){
         boolean result = (getLocationNo() == r.getLocationNo() && stops.size() == r.getStopList().size());
         if(!result)
             return false;
@@ -92,11 +101,12 @@ public class Route {
         lineOptions.add(new LatLng(location.getLatitude(), location.getLongitude()));
     }
 
-    public void addStop(Location location){
+    public void addStop(LatLng location, String text){
         stops.add(location);
+        texts.add(text);
     }
 
-    public ArrayList<Location> getStopList(){
+    public ArrayList<LatLng> getStopList(){
         return stops;
     }
 
@@ -107,7 +117,7 @@ public class Route {
         for(int i = 0; i < getLocationNo(); i++)
             lineOptions.add(
                     new LatLng(locations.get(i).getLatitude(), locations.get(i).getLongitude()));
-        lineOptions.width((int) (CIRCLE_RADIUS * 3));
+        lineOptions.width((int) (CIRCLE_RADIUS * 1.5));
         lineOptions.color(DRAW_COLOR);
         line = map.addPolyline(lineOptions);
 
@@ -115,14 +125,11 @@ public class Route {
         for(int i = 0; i < getLocationNo(); i++) {
             Circle c = map.addCircle(circles.get(i));
             dots.add(c);
-
-
-
-
         }
 
-
-
+        for(int i = 0; i < getStopList().size(); i++) {
+            markers.add(MapActivity.putMarker(map, stops.get(i).latitude, stops.get(i).longitude, texts.get(i)));
+        }
     }
 
     public void clear(){
@@ -130,12 +137,20 @@ public class Route {
             dots.get(0).remove();
             dots.remove(0);
         }
+        while(markers.size() > 0){
+            markers.get(0).remove();
+            markers.remove(0);
+        }
         if(line != null)
             line.remove();
     }
 
     public ArrayList<CircleOptions> getCircles(){
         return circles;
+    }
+
+    public ArrayList<String> getTexts(){
+        return texts;
     }
 
     public ArrayList<Circle> getDots(){
@@ -217,7 +232,7 @@ public class Route {
     public String getStops(){
         String result = "";
         for(int i = 0; i < stops.size(); i++)
-            result += locToString(stops.get(i));
+            result += stops.get(i).latitude + "," +  stops.get(i).longitude + "," + texts.get(i) + "+";
         return result;
     }
 
@@ -235,11 +250,8 @@ public class Route {
             input = input.substring(input.indexOf('+') + 1);
         }
         input = input.substring(input.indexOf(':') + 2);
-
-        while(!input.equals("\"")){
-            r.addStop(stringToLoc(input.substring(0, input.indexOf('+') + 1)));
-            input = input.substring(input.indexOf('+') + 1);
-        }
+        input = input.substring(0, input.indexOf('"'));
+        r.enterAllStops(input);
         return r;
     }
 
@@ -247,6 +259,19 @@ public class Route {
         return location.getLatitude() + "," +  location.getLongitude() + "," +  location.getTime()
                 + "," + location.getSpeed() + "," +  location.getAccuracy()
                 + "," + location.getAltitude() + "+";
+    }
+
+    public void enterAllStops(String string){
+        String input = string + "!";
+        while(!input.equals("!")){
+            double lat = Double.parseDouble(input.substring(0, input.indexOf(',')));
+            input.substring(input.indexOf(',') + 1);
+            double lon = Double.parseDouble(input.substring(0, input.indexOf(',')));
+            input.substring(input.indexOf(',') + 1);
+            String txt = input.substring(0, input.indexOf(','));
+            input.substring(input.indexOf('+') + 1);
+            addStop(new LatLng(lat, lon), txt);
+        }
     }
 
     public static Location stringToLoc(String string){

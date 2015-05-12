@@ -1,8 +1,10 @@
 package com.example.touravel.app;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -17,10 +19,12 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -34,6 +38,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -96,25 +101,46 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     @Override
     public void onMapClick(LatLng point) {
-        /*
         Location loc = new Location("fused");
         loc.setLatitude(point.latitude);
         loc.setLongitude(point.longitude);
         BackgroundService.curRoute.addLocation(loc);
-        if(count%3 == 0)
-            BackgroundService.curRoute.addStop(loc);
         BackgroundService.curRoute.draw(theMap);
-        count++;
-        */
     }
 
 
     @Override
     public void onMapLongClick(LatLng point) {
-        /*
-        BackgroundService.sendRoute();
-        BackgroundService.curRoute.delete();
-        */
+        boolean found = false;
+        Location loc = new Location("");
+        for(int i = 0; i < BackgroundService.curRoute.getLocationNo(); i++){
+            loc.setLatitude(point.latitude);
+            loc.setLongitude(point.longitude);
+            if(loc.distanceTo(BackgroundService.curRoute.getLocation(i))
+                    < Route.CIRCLE_RADIUS + BackgroundService.MIN_DISTANCE_BTW_LOCS){
+                found = true;
+                loc = BackgroundService.curRoute.getLocation(i);
+                break;
+            }
+        }
+        if(found){
+            final EditText input = new EditText(this);
+            final LatLng p = new LatLng(loc.getLatitude(), loc.getLongitude());
+            new AlertDialog.Builder(this)
+                    .setTitle("Enter your note")
+                    //.setMessage("mesaj")
+                    .setView(input)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            BackgroundService.curRoute.addStop(p, input.getText().toString());
+                            BackgroundService.curRoute.draw(theMap);
+                        }
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Do nothing.
+                }
+            }).show();
+        }
     }
 
 
@@ -144,8 +170,8 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
                 .fillColor(Route.DRAW_COLOR));
     }
 
-    public static void putMarker(GoogleMap map, double  latitude, double longitude, String text){
-        map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(text));
+    public static Marker putMarker(GoogleMap map, double  latitude, double longitude, String text){
+        return map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(text));
     }
 
     public void moveCam(double  latitude, double longitude, double zoom){

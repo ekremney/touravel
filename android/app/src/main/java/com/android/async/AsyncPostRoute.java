@@ -4,8 +4,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.touravel.app.BackgroundService;
 import com.example.touravel.app.SettingsActivity;
 import com.example.touravel.app.SplashScreen;
+import com.example.touravel.app.StorylineActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -94,6 +96,7 @@ public class AsyncPostRoute extends AsyncTask<String, Void, Void> {
         if(responseCode >=200 && responseCode < 300)
         {
             Toast.makeText(SplashScreen.cnt, "Route sent." , Toast.LENGTH_LONG).show();
+            BackgroundService.curRoute.delete();
         }
         else
         {

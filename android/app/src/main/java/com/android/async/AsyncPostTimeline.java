@@ -90,7 +90,7 @@ public class AsyncPostTimeline extends AsyncTask<String, Void, Void> {
     {
         if(responseCode >=200 && responseCode < 300)
         {
-            Toast.makeText(SplashScreen.cnt, "Post shared." , Toast.LENGTH_LONG).show();
+            Toast.makeText(SplashScreen.cnt, "Post shared." , Toast.LENGTH_SHORT).show();
         }
         else
         {
