@@ -66,8 +66,8 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD655fyBe9TYkReqJ8FED0IgdMxem2Y44s" />
-        <!-- android:value="AIzaSyA0Fvx1CILhKLLvvg_OTVivOTxV6Yc5dP8" -->
+            android:value="AIzaSyATNOg5ERR0LzEqZbCTTsyxz0pNeO9eeGQ" />
+        <!-- Gökhan'ın telefonu için key: AIzaSyD655fyBe9TYkReqJ8FED0IgdMxem2Y44s -->
         <activity
             android:name=".ListUsersActivity"
             android:label="@string/app_name" >

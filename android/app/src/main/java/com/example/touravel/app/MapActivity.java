@@ -101,16 +101,6 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
     @Override
     public void onMapClick(LatLng point) {
-        Location loc = new Location("fused");
-        loc.setLatitude(point.latitude);
-        loc.setLongitude(point.longitude);
-        BackgroundService.curRoute.addLocation(loc);
-        BackgroundService.curRoute.draw(theMap);
-    }
-
-
-    @Override
-    public void onMapLongClick(LatLng point) {
         boolean found = false;
         Location loc = new Location("");
         for(int i = 0; i < BackgroundService.curRoute.getLocationNo(); i++){
@@ -128,7 +118,7 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
             final LatLng p = new LatLng(loc.getLatitude(), loc.getLongitude());
             new AlertDialog.Builder(this)
                     .setTitle("Enter your note")
-                    //.setMessage("mesaj")
+                            //.setMessage("mesaj")
                     .setView(input)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
@@ -141,6 +131,11 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
                 }
             }).show();
         }
+    }
+
+
+    @Override
+    public void onMapLongClick(LatLng point) {
     }
 
 
