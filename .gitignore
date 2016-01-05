@@ -9,6 +9,7 @@
 
 *.pyc
 *.jks
+*.keystore
 
 android/build/intermediates/model_data.bin
 
