@@ -8,6 +8,7 @@
 
 
 *.pyc
+*.jks
 
 android/build/intermediates/model_data.bin
 
